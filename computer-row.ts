@@ -1,4 +1,4 @@
-export class GameRow {
+export class ComputerRow {
 
 
     public generateRow() {
@@ -12,9 +12,7 @@ export class GameRow {
            const nextColorIndex = Math.floor(Math.random() * colors.length)
            const nextColor = colors[nextColorIndex]
            newRow.push(nextColor)
-           console.log(nextColor)
         }
-        console.log(newRow)
         return newRow
     }
 

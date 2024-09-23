@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GameRow = void 0;
-var GameRow = /** @class */ (function () {
-    function GameRow() {
+exports.ComputerRow = void 0;
+var ComputerRow = /** @class */ (function () {
+    function ComputerRow() {
     }
-    GameRow.prototype.generateRow = function () {
+    ComputerRow.prototype.generateRow = function () {
         var rowLength = 5;
         var colors = ['red', 'blue', 'green', 'yellow', 'pink', 'black', 'white', 'purple'];
         var newRow = [];
@@ -12,11 +12,9 @@ var GameRow = /** @class */ (function () {
             var nextColorIndex = Math.floor(Math.random() * colors.length);
             var nextColor = colors[nextColorIndex];
             newRow.push(nextColor);
-            console.log(nextColor);
         }
-        console.log(newRow);
         return newRow;
     };
-    return GameRow;
+    return ComputerRow;
 }());
-exports.GameRow = GameRow;
+exports.ComputerRow = ComputerRow;
