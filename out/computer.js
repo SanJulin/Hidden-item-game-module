@@ -3,22 +3,29 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Computer = void 0;
 const computer_row_1 = require("./computer-row");
 class Computer {
-    constructor() {
-        this.gameRow = [];
-        this.createComputerRow();
+    constructor(numberOfColors) {
+        this.computerRow = [];
+        this.numberOfColors = 5;
+        this.numberOfColors = numberOfColors;
+        this.computerRow = this.createComputerRow();
     }
     createComputerRow() {
-        const newComputerRow = new computer_row_1.ComputerRow();
-        this.gameRow = newComputerRow.generateRow();
+        const computerRow = new computer_row_1.ComputerRow(this.numberOfColors);
+        return computerRow.generateRow();
     }
     checkAnswer(answer) {
-        const answered = answer;
-        console.log(answered);
-        if (answered === this.gameRow) {
+        const answerFromPlayer = answer;
+        console.log(answerFromPlayer);
+        let correctCharacters = 0;
+        for (let i = 0; i < answerFromPlayer.length; i++) {
+            if (answerFromPlayer[i] === this.computerRow[i])
+                correctCharacters++;
+        }
+        if (correctCharacters === this.numberOfColors) {
             return 'You won';
         }
         else {
-            return 'Wrong answer';
+            return `You had ${correctCharacters}.`;
         }
     }
 }

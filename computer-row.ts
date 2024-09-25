@@ -1,8 +1,12 @@
 export class ComputerRow {
-
+    private numberOfColors: number
+    
+    constructor(numberOfColors: number) {
+        this.numberOfColors = numberOfColors
+    }
 
     public generateRow() {
-        const rowLength = 5
+        const rowLength = this.numberOfColors
 
         const colors = ['red', 'blue', 'green', 'yellow', 'pink', 'black', 'white', 'purple']
 

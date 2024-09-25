@@ -2,8 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ComputerRow = void 0;
 class ComputerRow {
+    constructor(numberOfColors) {
+        this.numberOfColors = numberOfColors;
+    }
     generateRow() {
-        const rowLength = 5;
+        const rowLength = this.numberOfColors;
         const colors = ['red', 'blue', 'green', 'yellow', 'pink', 'black', 'white', 'purple'];
         const newRow = [];
         for (let i = 0; i < rowLength; i++) {
