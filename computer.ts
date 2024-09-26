@@ -2,16 +2,18 @@ import { ComputerRow } from './computer-row';
 
 export class Computer {
     private computerRow: string[] = []
-    private numberOfColors: number = 5
+    private numberOfCharacters: number
+    private theme: string
 
-    constructor(numberOfColors: number) {
-        this.numberOfColors = numberOfColors
+    constructor(numberOfCharacters = 5, theme = 'colors') {
+        this.numberOfCharacters = numberOfCharacters
+        this.theme = theme
 
         this.computerRow = this.createComputerRow()
     }
 
     private createComputerRow() {
-        const computerRow = new ComputerRow(this.numberOfColors)
+        const computerRow = new ComputerRow(this.numberOfCharacters, this.theme)
 
             return computerRow.generateRow()
     }
@@ -26,11 +28,11 @@ export class Computer {
                 correctCharacters ++
         }
 
-        if (correctCharacters === this.numberOfColors) {
+        if (correctCharacters === this.numberOfCharacters) {
             return 'Congratulations! You won'
         }
         else {
-            return `You had ${correctCharacters}.`
+            return `You had ${correctCharacters} correct answers.`
         }
     }
 
