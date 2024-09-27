@@ -7,10 +7,11 @@ export class Theme {
 
     private flags = ['sweden', 'japan', 'italy', 'norway', 'germany', 'china', 'usa', 'uk']
 
+    private letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+
     private arr : string[]
 
     constructor(theme : string) {
-        console.log(theme)
         this.setTheme(theme)
     }
 
@@ -36,6 +37,9 @@ export class Theme {
         } 
         if (this.theme === 'flags') {
             this.arr = this.flags
+        } 
+        if (this.theme === 'letters') {
+            this.arr = this.letters
         } else {
             console.log('no theme set')
         }

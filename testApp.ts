@@ -1,12 +1,12 @@
 import { Computer } from './computer'
 import { Theme } from './theme'
 
-const theme = new Theme('flags')
-console.log(theme)
+const theme = new Theme('letters')
+const gameArr = theme.getArr()
 
-const computer = new Computer(6, theme.getTheme)
+const computer = new Computer(5, gameArr)
 
 console.log(computer)
 
 
-console.log(computer.checkAnswer(['sweden', 'japan', 'italy', 'norway', 'germany', 'china']))
+console.log(computer.checkAnswer(['f', 'c', 'a', 'a', 'b']))
