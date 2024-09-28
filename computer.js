@@ -6,6 +6,7 @@ var Computer = /** @class */ (function () {
     function Computer(numberOfCharacters, themeArr) {
         if (numberOfCharacters === void 0) { numberOfCharacters = 5; }
         this.computerRow = [];
+        this.answerWithFeedback = [];
         this.numberOfCharacters = numberOfCharacters;
         this.computerRow = this.createComputerRow(themeArr);
     }
@@ -18,47 +19,27 @@ var Computer = /** @class */ (function () {
         console.log("Answer from player: ".concat(answerFromPlayer));
         var correctCharacters = 0;
         var result;
-        var correctSigns = [];
+        var signObject = { sign: String, comment: String };
         for (var i = 0; i < answerFromPlayer.length; i++) {
             if (answerFromPlayer[i] === this.computerRow[i]) {
                 correctCharacters++;
-                correctSigns.push(answerFromPlayer[i]);
+                signObject = { sign: answerFromPlayer[i], comment: 'correct place' };
             }
+            else if (answerFromPlayer[i] !== this.computerRow[i] && this.computerRow.includes(answerFromPlayer[i])) {
+                signObject = { sign: answerFromPlayer[i], comment: 'available, but in the wrong place' };
+            }
+            else {
+                signObject = { sign: answerFromPlayer[i], comment: 'not available in the row' };
+            }
+            this.answerWithFeedback.push(signObject);
         }
         if (correctCharacters === this.numberOfCharacters) {
             result = 'Congratulations! You won! All the signs are in the correct place';
         }
         else {
-            result = this.calculateResult(answerFromPlayer);
+            result = this.answerWithFeedback;
         }
         return result;
-    };
-    Computer.prototype.calculateResult = function (answerFromPlayer) {
-        var answerWithFeedback = [];
-        var checkedSigns = [];
-        for (var i = 0; i < answerFromPlayer.length; i++) {
-            var signObject = { sign: String, comment: String };
-            if (answerFromPlayer[i] === this.computerRow[i]) {
-                var signObject_1 = { sign: answerFromPlayer[i], comment: 'correct place' };
-                answerWithFeedback.push(signObject_1);
-                checkedSigns.push[i];
-            }
-            else {
-                for (var j = 0; j < this.computerRow.length; j++) {
-                    if (answerFromPlayer[i] !== this.computerRow[i] && answerFromPlayer[i] === this.computerRow[j] && !checkedSigns.includes(answerFromPlayer[i])) {
-                        var signObject_2 = { sign: answerFromPlayer[i], comment: 'available, but in the wrong place' };
-                        answerWithFeedback.push(signObject_2);
-                        checkedSigns.push[i];
-                    }
-                    if (answerFromPlayer[i] !== this.computerRow[i] && answerFromPlayer[i] !== this.computerRow[j] && !checkedSigns.includes(answerFromPlayer[i])) {
-                        var signObject_3 = { sign: answerFromPlayer[i], comment: 'not available in the row' };
-                        answerWithFeedback.push(signObject_3);
-                        checkedSigns.push[i];
-                    }
-                }
-            }
-        }
-        return answerWithFeedback;
     };
     return Computer;
 }());
