@@ -2,17 +2,18 @@ import { ComputerRow } from './computer-row';
 
 export class Computer {
     private computerRow: string[] = []
-    private numberOfCharacters: number
+    private numberOfItems: number
     private numberOfGuesses : number = 0
+    private result : any
 
-    constructor(numberOfCharacters = 5, themeArr: string[]) {
-        this.numberOfCharacters = numberOfCharacters
+    constructor(numberOfItems = 5, themeArr: string[]) {
+        this.numberOfItems = numberOfItems
 
         this.computerRow = this.createComputerRow(themeArr)
     }
 
     private createComputerRow(themeArr: string[]) {
-        const computerRow = new ComputerRow(this.numberOfCharacters, themeArr)
+        const computerRow = new ComputerRow(this.numberOfItems, themeArr)
 
         return computerRow.generateRow()
     }
@@ -20,30 +21,25 @@ export class Computer {
     public checkAnswer(answer: string[]) {
         const answerFromPlayer = answer
         console.log(`Answer from player: ${answerFromPlayer}`)
-        let correctCharacters = 0
-        let result: any = []
         let answerWithFeedback = []
+        let numberOfCorrectItems : number = 0
 
         for (let i = 0; i < answerFromPlayer.length; i++) {
-            let signObject: object = { sign: String, color: String }
+            let itemObject: object = { item: String, color: String }
             if (answerFromPlayer[i] === this.computerRow[i]) {
-                correctCharacters++
-                signObject = { sign: answerFromPlayer[i], color: 'green' }
+                numberOfCorrectItems++
+                itemObject = { item: answerFromPlayer[i], color: 'green' }
             } else if (this.computerRow.includes(answerFromPlayer[i])) {
-                signObject = { sign: answerFromPlayer[i], color: 'yellow' }
+                itemObject = { item: answerFromPlayer[i], color: 'yellow' }
             } else {
-                signObject = { sign: answerFromPlayer[i], color: 'red' }
+                itemObject = { item: answerFromPlayer[i], color: 'red' }
             }
-            answerWithFeedback.push(signObject)
+            answerWithFeedback.push(itemObject)
         }
-        console.log(`AnswerWithFeedback: ${JSON.stringify(answerWithFeedback)}`)
-        if (correctCharacters === this.numberOfCharacters) {
-            result = 'Congratulations! You made it!'
+        if (numberOfCorrectItems >= this.numberOfItems) {
+            return JSON.stringify('Congratulations! You made it!')
+        } else {
+            return JSON.stringify(answerWithFeedback)
         }
-        else {
-            result = answerWithFeedback
-        }
-        this.numberOfGuesses ++
-        return JSON.stringify(result)
     }
 }

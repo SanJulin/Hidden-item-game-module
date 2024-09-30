@@ -6,15 +6,14 @@ var themes = ['letters', 'animals', 'flags', 'colors'];
 var themeIndex = Math.floor(Math.random() * themes.length);
 var thisTheme = themes[themeIndex];
 var theme = new theme_1.Theme(thisTheme);
-var gameArr = theme.getItemArray();
-var numberOfCharacters = Math.ceil(Math.random() * 8);
-var computer = new computer_1.Computer(numberOfCharacters, gameArr);
+var itemArray = theme.getItemArray();
+var numberOfItems = Math.ceil(Math.random() * 8);
+var computer = new computer_1.Computer(numberOfItems, itemArray);
 console.log(computer);
-var gameContinues = true;
 var answer = [];
-for (var i = 0; i < numberOfCharacters; i++) {
-    var guessIndex = Math.floor(Math.random() * gameArr.length);
-    var guess = gameArr[guessIndex];
+for (var i = 0; i < numberOfItems; i++) {
+    var guessIndex = Math.floor(Math.random() * itemArray.length);
+    var guess = itemArray[guessIndex];
     answer.push(guess);
 }
 var resultFeedback = computer.checkAnswer(answer);
@@ -42,8 +41,8 @@ for (var i = 0; i < result.length; i++) {
         newGuess.push(result[i].sign);
     }
     else {
-        var guessIndex = Math.floor(Math.random() * gameArr.length);
-        var guess = gameArr[guessIndex];
+        var guessIndex = Math.floor(Math.random() * itemArray.length);
+        var guess = itemArray[guessIndex];
         newGuess.push(guess);
     }
 }
