@@ -1,15 +1,7 @@
 export class Theme {
-    private theme : string
+    private theme : string 
 
-    private colors = ['red', 'blue', 'green', 'yellow', 'pink', 'black', 'white', 'purple']
-
-    private animals = ['tiger', 'elefant', 'gorilla', 'whale', 'giraff', 'zebra', 'bear', 'crocodile']
-
-    private flags = ['sweden', 'japan', 'italy', 'norway', 'germany', 'china', 'usa', 'uk']
-
-    private letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
-
-    private arr : string[]
+    private itemArray : string[] = []
 
     constructor(theme : string) {
         this.setTheme(theme)
@@ -21,27 +13,29 @@ export class Theme {
 
     private setTheme(theme: string) {
         this.theme = theme
-        this.setArr()
-    }
-
-    public getArr() : string[] {
-        return this.arr
-    }
-
-    private setArr(){
-        if (this.theme === 'colors') {
-            this.arr = this.colors
+        if (this.theme !== '') {
+            this.setItemArray()
         }
-        if (this.theme === 'animals') {
-            this.arr = this.animals
-        } 
-        if (this.theme === 'flags') {
-            this.arr = this.flags
-        } 
-        if (this.theme === 'letters') {
-            this.arr = this.letters
-        } else {
-            console.log('no theme set')
+    }
+
+    public getItemArray() : string[] {
+        return this.itemArray
+    }
+
+    private setItemArray(){
+        if (this.theme !== undefined) {
+            if (this.theme === 'animals') {
+                this.itemArray = ['tiger', 'elefant', 'gorilla', 'whale', 'giraff', 'zebra', 'bear', 'crocodile']
+            } 
+            if (this.theme === 'colors') {
+                this.itemArray = ['red', 'blue', 'green', 'yellow', 'pink', 'black', 'white', 'purple']
+            }
+            if (this.theme === 'flags') {
+                this.itemArray = ['sweden', 'japan', 'italy', 'norway', 'kenya', 'china', 'brazil', 'uk']
+            } 
+            if (this.theme === 'letters') {
+                this.itemArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+            }
         }
     }
 }

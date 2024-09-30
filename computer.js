@@ -6,7 +6,7 @@ var Computer = /** @class */ (function () {
     function Computer(numberOfCharacters, themeArr) {
         if (numberOfCharacters === void 0) { numberOfCharacters = 5; }
         this.computerRow = [];
-        this.answerWithFeedback = [];
+        this.numberOfGuesses = 0;
         this.numberOfCharacters = numberOfCharacters;
         this.computerRow = this.createComputerRow(themeArr);
     }
@@ -18,28 +18,31 @@ var Computer = /** @class */ (function () {
         var answerFromPlayer = answer;
         console.log("Answer from player: ".concat(answerFromPlayer));
         var correctCharacters = 0;
-        var result;
-        var signObject = { sign: String, comment: String };
+        var result = [];
+        var answerWithFeedback = [];
         for (var i = 0; i < answerFromPlayer.length; i++) {
+            var signObject = { sign: String, color: String };
             if (answerFromPlayer[i] === this.computerRow[i]) {
                 correctCharacters++;
-                signObject = { sign: answerFromPlayer[i], comment: 'correct place' };
+                signObject = { sign: answerFromPlayer[i], color: 'green' };
             }
-            else if (answerFromPlayer[i] !== this.computerRow[i] && this.computerRow.includes(answerFromPlayer[i])) {
-                signObject = { sign: answerFromPlayer[i], comment: 'available, but in the wrong place' };
+            else if (this.computerRow.includes(answerFromPlayer[i])) {
+                signObject = { sign: answerFromPlayer[i], color: 'yellow' };
             }
             else {
-                signObject = { sign: answerFromPlayer[i], comment: 'not available in the row' };
+                signObject = { sign: answerFromPlayer[i], color: 'red' };
             }
-            this.answerWithFeedback.push(signObject);
+            answerWithFeedback.push(signObject);
         }
+        console.log("AnswerWithFeedback: ".concat(JSON.stringify(answerWithFeedback)));
         if (correctCharacters === this.numberOfCharacters) {
-            result = 'Congratulations! You won! All the signs are in the correct place';
+            result = 'Congratulations! You made it!';
         }
         else {
-            result = this.answerWithFeedback;
+            result = answerWithFeedback;
         }
-        return result;
+        this.numberOfGuesses++;
+        return JSON.stringify(result);
     };
     return Computer;
 }());

@@ -2,19 +2,19 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ComputerRow = void 0;
 class ComputerRow {
-    constructor(numberOfCharacters, themeArr) {
-        this.numberOfCharacters = numberOfCharacters;
-        this.themeArr = themeArr;
+    constructor(numberOfItems = 5, itemArray) {
+        this.computerRow = [];
+        this.numberOfItems = numberOfItems;
+        this.itemArray = itemArray;
     }
     generateRow() {
-        const rowLength = this.numberOfCharacters;
-        const newRow = [];
+        const rowLength = this.numberOfItems;
         for (let i = 0; i < rowLength; i++) {
-            const nextColorIndex = Math.floor(Math.random() * this.themeArr.length);
-            const nextColor = this.themeArr[nextColorIndex];
-            newRow.push(nextColor);
+            const nextItemIndex = Math.floor(Math.random() * this.itemArray.length);
+            const nextItem = this.itemArray[nextItemIndex];
+            this.computerRow.push(nextItem);
         }
-        return newRow;
+        return this.computerRow;
     }
 }
 exports.ComputerRow = ComputerRow;

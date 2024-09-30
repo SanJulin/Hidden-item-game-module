@@ -3,10 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Theme = void 0;
 var Theme = /** @class */ (function () {
     function Theme(theme) {
-        this.colors = ['red', 'blue', 'green', 'yellow', 'pink', 'black', 'white', 'purple'];
-        this.animals = ['tiger', 'elefant', 'gorilla', 'whale', 'giraff', 'zebra', 'bear', 'crocodile'];
-        this.flags = ['sweden', 'japan', 'italy', 'norway', 'germany', 'china', 'usa', 'uk'];
-        this.letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+        this.itemArray = [];
         this.setTheme(theme);
     }
     Theme.prototype.getTheme = function () {
@@ -14,26 +11,27 @@ var Theme = /** @class */ (function () {
     };
     Theme.prototype.setTheme = function (theme) {
         this.theme = theme;
-        this.setArr();
+        if (this.theme !== '') {
+            this.setItemArray();
+        }
     };
-    Theme.prototype.getArr = function () {
-        return this.arr;
+    Theme.prototype.getItemArray = function () {
+        return this.itemArray;
     };
-    Theme.prototype.setArr = function () {
-        if (this.theme === 'colors') {
-            this.arr = this.colors;
-        }
-        if (this.theme === 'animals') {
-            this.arr = this.animals;
-        }
-        if (this.theme === 'flags') {
-            this.arr = this.flags;
-        }
-        if (this.theme === 'letters') {
-            this.arr = this.letters;
-        }
-        else {
-            console.log('no theme set');
+    Theme.prototype.setItemArray = function () {
+        if (this.theme !== undefined) {
+            if (this.theme === 'animals') {
+                this.itemArray = ['tiger', 'elefant', 'gorilla', 'whale', 'giraff', 'zebra', 'bear', 'crocodile'];
+            }
+            if (this.theme === 'colors') {
+                this.itemArray = ['red', 'blue', 'green', 'yellow', 'pink', 'black', 'white', 'purple'];
+            }
+            if (this.theme === 'flags') {
+                this.itemArray = ['sweden', 'japan', 'italy', 'norway', 'kenya', 'china', 'brazil', 'uk'];
+            }
+            if (this.theme === 'letters') {
+                this.itemArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+            }
         }
     };
     return Theme;

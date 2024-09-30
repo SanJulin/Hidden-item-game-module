@@ -3,7 +3,7 @@ import { ComputerRow } from './computer-row';
 export class Computer {
     private computerRow: string[] = []
     private numberOfCharacters: number
-    private answerWithFeedback: object[] = []
+    private numberOfGuesses : number = 0
 
     constructor(numberOfCharacters = 5, themeArr: string[]) {
         this.numberOfCharacters = numberOfCharacters
@@ -21,26 +21,29 @@ export class Computer {
         const answerFromPlayer = answer
         console.log(`Answer from player: ${answerFromPlayer}`)
         let correctCharacters = 0
-        let result: any
-        let signObject: object = { sign: String, comment: String }
+        let result: any = []
+        let answerWithFeedback = []
+
         for (let i = 0; i < answerFromPlayer.length; i++) {
+            let signObject: object = { sign: String, color: String }
             if (answerFromPlayer[i] === this.computerRow[i]) {
                 correctCharacters++
-                signObject = { sign: answerFromPlayer[i], comment: 'correct place' }
-            } else if (answerFromPlayer[i] !== this.computerRow[i] && this.computerRow.includes(answerFromPlayer[i])) {
-                signObject = { sign: answerFromPlayer[i], comment: 'available, but in the wrong place' }
+                signObject = { sign: answerFromPlayer[i], color: 'green' }
+            } else if (this.computerRow.includes(answerFromPlayer[i])) {
+                signObject = { sign: answerFromPlayer[i], color: 'yellow' }
             } else {
-                signObject = { sign: answerFromPlayer[i], comment: 'not available in the row' }
+                signObject = { sign: answerFromPlayer[i], color: 'red' }
             }
-            this.answerWithFeedback.push(signObject)
+            answerWithFeedback.push(signObject)
         }
+        console.log(`AnswerWithFeedback: ${JSON.stringify(answerWithFeedback)}`)
         if (correctCharacters === this.numberOfCharacters) {
-            result = 'Congratulations! You won! All the signs are in the correct place'
+            result = 'Congratulations! You made it!'
         }
         else {
-            result = this.answerWithFeedback
+            result = answerWithFeedback
         }
-        return result
+        this.numberOfGuesses ++
+        return JSON.stringify(result)
     }
 }
-

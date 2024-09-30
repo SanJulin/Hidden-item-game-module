@@ -1,23 +1,23 @@
 import { Theme } from "./theme"
 
 export class ComputerRow {
-    private numberOfCharacters: number
-    private themeArr: string[]
+    private numberOfItems: number
+    private itemArray: string[]
+    private computerRow: string [] = []
 
-    constructor(numberOfCharacters: number, themeArr: string []) {
-        this.numberOfCharacters = numberOfCharacters
-        this.themeArr = themeArr
+    constructor(numberOfItems: number = 5, itemArray: string []) {
+        this.numberOfItems = numberOfItems
+        this.itemArray = itemArray
     }
 
     public generateRow() {
-        const rowLength = this.numberOfCharacters
-        const newRow = []
+        const rowLength = this.numberOfItems
         for (let i = 0; i < rowLength; i++) {
-                const nextColorIndex = Math.floor(Math.random() * this.themeArr.length)
-                const nextColor = this.themeArr[nextColorIndex]
-                newRow.push(nextColor)
+                const nextItemIndex = Math.floor(Math.random() * this.itemArray.length)
+                const nextItem = this.itemArray[nextItemIndex]
+                this.computerRow.push(nextItem)
             }
-        return newRow
+        return this.computerRow
     }
 
 }

@@ -2,19 +2,20 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ComputerRow = void 0;
 var ComputerRow = /** @class */ (function () {
-    function ComputerRow(numberOfCharacters, themeArr) {
-        this.numberOfCharacters = numberOfCharacters;
-        this.themeArr = themeArr;
+    function ComputerRow(numberOfItems, itemArray) {
+        if (numberOfItems === void 0) { numberOfItems = 5; }
+        this.computerRow = [];
+        this.numberOfItems = numberOfItems;
+        this.itemArray = itemArray;
     }
     ComputerRow.prototype.generateRow = function () {
-        var rowLength = this.numberOfCharacters;
-        var newRow = [];
+        var rowLength = this.numberOfItems;
         for (var i = 0; i < rowLength; i++) {
-            var nextColorIndex = Math.floor(Math.random() * this.themeArr.length);
-            var nextColor = this.themeArr[nextColorIndex];
-            newRow.push(nextColor);
+            var nextItemIndex = Math.floor(Math.random() * this.itemArray.length);
+            var nextItem = this.itemArray[nextItemIndex];
+            this.computerRow.push(nextItem);
         }
-        return newRow;
+        return this.computerRow;
     };
     return ComputerRow;
 }());
