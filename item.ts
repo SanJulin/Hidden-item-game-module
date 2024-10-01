@@ -1,4 +1,3 @@
-
 /**
  * Class that represents one item in the game.
  */
@@ -39,7 +38,7 @@ class Item {
      * 
      * @returns { number } - the id of the current item.
      */
-    public getId()  {
+    public getId(): number  {
         return this.id
     }
 

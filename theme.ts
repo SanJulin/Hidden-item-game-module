@@ -2,10 +2,11 @@
  * Class that represents the theme of the game. 
  */
 class Theme {
-    private theme: string
+    private theme: string = ''
     private itemArray: string[] = []
+    private availableThemes: string[] = ['flags', 'animals', 'colors', 'professions', 'movies']
 
-    constructor(theme: string) {
+    constructor(theme?: string) {
         this.setTheme(theme)
     }
 
@@ -15,6 +16,9 @@ class Theme {
     * @returns { string } - the theme of the items used in the game.
     */
     public getTheme(): string {
+        if (this.theme === '') {
+            throw new Error('No theme has been set for the game')
+        }
         return this.theme
     }
 
@@ -27,7 +31,18 @@ class Theme {
         this.theme = theme
         if (this.theme !== '') {
             this.setItemArray()
+        } else {
+            this.theme === ''
         }
+    }
+
+    /**
+     * Gets all the themes available in the current version of the module. 
+     * 
+     * @returns { string [] } available themes - the themes available in the current version of the module.
+     */
+    public getAvailableThemes(): string[] {
+        return this.availableThemes
     }
 
     /**
@@ -37,6 +52,24 @@ class Theme {
      */
     public getItemArray(): string[] {
         return this.itemArray
+    }
+
+    /**
+     * 
+     * 
+     * @param theme { string } - the name of the theme
+     * @param themeArray { string [] } - the array with 8 items that should be included in the itemArray.
+     */
+    public useOtherTheme(theme: string, themeArray: string[]) {
+        if (themeArray.length !== 8) {
+            throw Error('The themeArray must contain 8 items.')
+        } 
+        if (theme === undefined) {
+            throw Error('Pls provide a theme for the game')
+        } else {
+            this.theme = theme
+            this.itemArray = themeArray
+        }
     }
 
     /**

@@ -14,7 +14,10 @@ var ComputerRow = /** @class */ (function () {
      *
      * @returns { number } - number of items included in the computer row.
      */
-    ComputerRow.prototype.getNumberOfItem = function () {
+    ComputerRow.prototype.getNumberOfItems = function () {
+        if (this.numberOfItems === null) {
+            throw new Error('Number of items has not been set for the game');
+        }
         return this.numberOfItems;
     };
     /**
@@ -31,10 +34,14 @@ var ComputerRow = /** @class */ (function () {
         }
     };
     /**
+     * Sets the itemArray if there are 8 items in the provided array.
      *
      * @param itemArray string [] - the array with themed items chosen for the game.
      */
     ComputerRow.prototype.setItemArray = function (itemArray) {
+        if (itemArray.length !== 8) {
+            throw new Error('The item array must contain 8 items');
+        }
         this.itemArray = itemArray;
     };
     /**

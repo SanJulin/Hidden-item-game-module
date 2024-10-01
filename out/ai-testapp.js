@@ -7,10 +7,10 @@ const computer_1 = __importDefault(require("./computer"));
 const theme_1 = __importDefault(require("./theme"));
 const themes = ['flags', 'animals', 'colors', 'professions', 'movies'];
 const themeIndex = Math.floor(Math.random() * themes.length);
-const thisTheme = themes[themeIndex];
-const theme = new theme_1.default(thisTheme);
+const newTheme = themes[themeIndex];
+const theme = new theme_1.default(newTheme);
 const itemArray = theme.getItemArray();
-console.log(itemArray);
+console.log(`Item options: ${itemArray}`);
 const numberOfItems = Math.ceil(Math.random() * 8);
 const computer = new computer_1.default(numberOfItems, itemArray);
 console.log(computer);
@@ -46,4 +46,4 @@ while (gameContinues === true) {
         gameContinues = false;
     }
 }
-//# sourceMappingURL=testapp.js.map
+//# sourceMappingURL=ai-testapp.js.map

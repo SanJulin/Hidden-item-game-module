@@ -53,6 +53,9 @@ class Computer {
      * @returns { string [] } - an array with items
      */
     getComputerRow(): string[] {
+        if (this.computerRow === undefined) {
+            throw new Error('The computer row has not been created yet')
+        }
         return this.computerRow
     }
 

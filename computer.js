@@ -48,6 +48,9 @@ var Computer = /** @class */ (function () {
      * @returns { string [] } - an array with items
      */
     Computer.prototype.getComputerRow = function () {
+        if (this.computerRow === undefined) {
+            throw new Error('The computer row has not been created yet');
+        }
         return this.computerRow;
     };
     /**

@@ -5,12 +5,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const computer_1 = __importDefault(require("./computer"));
 const theme_1 = __importDefault(require("./theme"));
-const themes = ['flags', 'animals', 'colors', 'professions', 'movies'];
+const themes = ['letters', 'animals', 'flags', 'colors'];
 const themeIndex = Math.floor(Math.random() * themes.length);
 const thisTheme = themes[themeIndex];
 const theme = new theme_1.default(thisTheme);
 const itemArray = theme.getItemArray();
-console.log(itemArray);
 const numberOfItems = Math.ceil(Math.random() * 8);
 const computer = new computer_1.default(numberOfItems, itemArray);
 console.log(computer);
@@ -22,10 +21,8 @@ while (gameContinues === true) {
         const guess = itemArray[guessIndex];
         answer.push(guess);
     }
-    console.log(`Answer from user: ${answer}`);
     let result = computer.checkAnswer(answer);
     let parsedResult = JSON.parse(result);
-    const numberOfGuesses = computer.getNumberOfGuesses();
     let correct = 0;
     for (let i = 0; i < parsedResult.length; i++) {
         if (parsedResult[i].color === 'green') {
@@ -33,7 +30,8 @@ while (gameContinues === true) {
         }
     }
     if (parsedResult === 'Congratulations! You made it!') {
-        console.log(`${parsedResult} Total number of guesses: ${numberOfGuesses}`);
+        console.log(parsedResult);
+        console.log(`Total number of guesses: ${computer.getNumberOfGuesses()}`);
         gameContinues = false;
     }
     else {
@@ -41,9 +39,5 @@ while (gameContinues === true) {
             console.log(parsedResult[i]);
         }
     }
-    if (numberOfGuesses >= 40) {
-        console.log(`You have unfortunately reached the maximum number of guesses. (${numberOfGuesses} guesses)`);
-        gameContinues = false;
-    }
 }
-//# sourceMappingURL=testapp.js.map
+//# sourceMappingURL=automatic-testapp.js.map

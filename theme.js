@@ -5,7 +5,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 var Theme = /** @class */ (function () {
     function Theme(theme) {
+        this.theme = '';
         this.itemArray = [];
+        this.availableThemes = ['flags', 'animals', 'colors', 'professions', 'movies'];
         this.setTheme(theme);
     }
     /**
@@ -14,6 +16,9 @@ var Theme = /** @class */ (function () {
     * @returns { string } - the theme of the items used in the game.
     */
     Theme.prototype.getTheme = function () {
+        if (this.theme === '') {
+            throw new Error('No theme has been set for the game');
+        }
         return this.theme;
     };
     /**
@@ -26,6 +31,17 @@ var Theme = /** @class */ (function () {
         if (this.theme !== '') {
             this.setItemArray();
         }
+        else {
+            this.theme === '';
+        }
+    };
+    /**
+     * Gets all the themes available in the current version of the module.
+     *
+     * @returns { string [] } available themes - the themes available in the current version of the module.
+     */
+    Theme.prototype.getAvailableThemes = function () {
+        return this.availableThemes;
     };
     /**
      * Gets the current array with items.
@@ -34,6 +50,24 @@ var Theme = /** @class */ (function () {
      */
     Theme.prototype.getItemArray = function () {
         return this.itemArray;
+    };
+    /**
+     *
+     *
+     * @param theme { string } - the name of the theme
+     * @param themeArray { string [] } - the array with 8 items that should be included in the itemArray.
+     */
+    Theme.prototype.useOtherTheme = function (theme, themeArray) {
+        if (themeArray.length !== 8) {
+            throw Error('The themeArray must contain 8 items.');
+        }
+        if (theme === undefined) {
+            throw Error('Pls provide a theme for the game');
+        }
+        else {
+            this.theme = theme;
+            this.itemArray = themeArray;
+        }
     };
     /**
      * Checks if this.theme is undefined and throws an error if it is. Sets the array with items that should be used in the game by checking what the current theme is.
