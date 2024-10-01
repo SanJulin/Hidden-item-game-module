@@ -61,7 +61,7 @@ while (gameContinues === true) {
             answer.push(itemOptions[7])
         }
     }
-
+    console.log(`Answer from player: ${answer}`)
     let result = computer.checkAnswer(answer)
     let parsedResult = JSON.parse(result)
 
@@ -73,6 +73,8 @@ while (gameContinues === true) {
     }
     if (parsedResult === 'Congratulations! You made it!') {
         console.log(parsedResult)
+        const numberOfGuesses = computer.getNumberOfGuesses
+        console.log(numberOfGuesses)
         gameContinues = false
     } else {
         for (let i = 0; i < parsedResult.length; i++) {
