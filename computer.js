@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Computer = void 0;
 var computer_row_1 = require("./computer-row");
 /**
  * Class that represents the computer in the game.
@@ -40,7 +39,7 @@ var Computer = /** @class */ (function () {
      * @returns
      */
     Computer.prototype.createComputerRow = function (themeArray) {
-        var computerRow = new computer_row_1.ComputerRow(this.numberOfItems, themeArray);
+        var computerRow = new computer_row_1.default(this.numberOfItems, themeArray);
         return computerRow.generateRow();
     };
     /**
@@ -97,4 +96,4 @@ var Computer = /** @class */ (function () {
     };
     return Computer;
 }());
-exports.Computer = Computer;
+exports.default = Computer;

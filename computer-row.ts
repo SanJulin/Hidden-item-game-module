@@ -1,7 +1,7 @@
 /**
  * Class that represents the computer row with items that the Computer is creating.  
  */
-export class ComputerRow {
+class ComputerRow {
     private numberOfItems: number
     private itemArray: string[]
     private computerRow: string[] = []
@@ -55,5 +55,6 @@ export class ComputerRow {
         }
         return this.computerRow
     }
-
 }
+
+export default ComputerRow

@@ -1,21 +1,21 @@
 import * as readlineSync from 'readline-sync';
-import { Theme } from './theme';
-import { Computer } from './computer';
+import Theme from './theme';
+import Computer from './computer';
 
-const themeFromUser = readlineSync.question('Pls enter the theme you would like to play with? \n1. animals \n2. flags \n3. colors \n4. letters) \n')
+const themeFromUser = readlineSync.question('Pls enter the theme you would like to play with? \n1. flags \n2. animals \n3. colors \n4. professions \n5. movies \n')
 
 let theme: string
+
 if (themeFromUser === '1') {
-    theme = 'animals'
-}
-if (themeFromUser === '2') {
     theme = 'flags'
-}
-if (themeFromUser === '3') {
+} else if (themeFromUser === '2') {
+    theme = 'animals'
+} else if (themeFromUser === '3') {
     theme = 'colors'
-}
-if (themeFromUser === '4') {
-    theme = 'letters'
+} else if (themeFromUser === '4') {
+    theme = 'professions'
+} else if (themeFromUser === '5') {
+    theme = 'movies'
 }
 
 const numberOfItems = readlineSync.question('How many items would you like to play with? (1-8) ');
@@ -65,20 +65,19 @@ while (gameContinues === true) {
     let result = computer.checkAnswer(answer)
     let parsedResult = JSON.parse(result)
 
-    let correct : number = 0
+    let correct: number = 0
     for (let i = 0; i < parsedResult.length; i++) {
         if (parsedResult[i].color === 'green') {
             correct++
-        } 
+        }
     }
     if (parsedResult === 'Congratulations! You made it!') {
         console.log(parsedResult)
-        const numberOfGuesses = computer.getNumberOfGuesses
-        console.log(numberOfGuesses)
+        console.log(`Total number of guesses: ${computer.getNumberOfGuesses()}`)
         gameContinues = false
     } else {
         for (let i = 0; i < parsedResult.length; i++) {
             console.log(parsedResult[i])
-    }        
+        }
     }
 }

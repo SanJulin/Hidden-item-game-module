@@ -1,5 +1,5 @@
-import { Computer } from './computer'
-import { Theme } from './theme'
+import Computer from './computer'
+import Theme from './theme'
 
 const themes = ['letters', 'animals', 'flags', 'colors']
 const themeIndex = Math.floor(Math.random() * themes.length)

@@ -5,10 +5,10 @@ var theme_1 = require("./theme");
 var themes = ['letters', 'animals', 'flags', 'colors'];
 var themeIndex = Math.floor(Math.random() * themes.length);
 var thisTheme = themes[themeIndex];
-var theme = new theme_1.Theme(thisTheme);
+var theme = new theme_1.default(thisTheme);
 var itemArray = theme.getItemArray();
 var numberOfItems = Math.ceil(Math.random() * 8);
-var computer = new computer_1.Computer(numberOfItems, itemArray);
+var computer = new computer_1.default(numberOfItems, itemArray);
 console.log(computer);
 var answer = [];
 for (var i = 0; i < numberOfItems; i++) {

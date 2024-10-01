@@ -1,9 +1,9 @@
-import { ComputerRow } from './computer-row';
+import  ComputerRow from './computer-row';
 
 /**
  * Class that represents the computer in the game.
  */
-export class Computer {
+class Computer {
     private computerRow: string[] = []
     private numberOfItems: number
     private numberOfGuesses: number = 0
@@ -92,7 +92,7 @@ export class Computer {
             }
             answerWithFeedback.push(itemObject)
         }
-        this.numberOfGuesses++
+        this.numberOfGuesses ++
         if (numberOfCorrectItems >= this.numberOfItems) {
             return JSON.stringify('Congratulations! You made it!')
         } else {
@@ -100,3 +100,5 @@ export class Computer {
         }
     }
 }
+
+export default Computer

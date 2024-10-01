@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ComputerRow = void 0;
 /**
  * Class that represents the computer row with items that the Computer is creating.
  */
@@ -54,4 +53,4 @@ var ComputerRow = /** @class */ (function () {
     };
     return ComputerRow;
 }());
-exports.ComputerRow = ComputerRow;
+exports.default = ComputerRow;
