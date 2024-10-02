@@ -26,8 +26,8 @@ var ComputerRow = /** @class */ (function () {
      * @param numberOfItems { number } - number of items that should be included in the computer row.
      */
     ComputerRow.prototype.setNumberOfItems = function (numberOfItems) {
-        if (numberOfItems === null) {
-            throw new Error('Pls provide a valid number');
+        if (numberOfItems < 1 || numberOfItems > 8) {
+            throw new Error('Pls provide a number between 1 - 8');
         }
         else {
             this.numberOfItems = numberOfItems;

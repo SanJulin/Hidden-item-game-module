@@ -2,6 +2,8 @@
 
 ### Reflektionen baseras på hur koden ser ut i commit "Add Reflektion.md file".
 
+## Kapitel 2
+
 | Namn                | Reflektion och regler från Clean Code |
 |---------------------|---------------------------------------|
 | Computer            |                                       |
@@ -20,7 +22,10 @@
 | availableThemes     |                                       |
 | answerWithFeedback  | Avoid disinformation: I checkAnswer metoden förekommer flera variabler som kan förvirra användaren av modulen. Dels finns det en parameter som heter answer som innehåller en array med svar från spelaren. Sen skapas en answerFromPlayer variabel som innehåller answer och därefter en array som heter answerWithFeedback, men det är inte tydligt att answer den här gången kommer från computer istället. Det vore bättre att kalla den för feedbackFromComputer eller något liknande. |
 
-| Metodnamn och länk eller kod | Antal rader (ej ws) | Reflektion |
+
+## Kapitel 3
+
+| Metodnamn och länk eller kod | Antal rader         | Reflektion |
 |------------------------------|---------------------|------------|
 | checkAnswer                  | 26                  | Small / Do one thing / Reading Code from Top to Bottom: Lång metod som bryter mot många principer då den förutom att vara lång även gör mer än en sak och att indenteringen varierar istället för att öka längre ner i koden. <br> Structure programming: Metoden innehåller 2 retursatser vilket inte följer reglerna för “structure programming. Eftersom metoden inte är kort så borde jag undvika 2 retursatser. <br> Command query separation: Metoden returnerar både resultvärden och förändrar tillståndet för en privatvariabel vilket bryter mot principen Command query separation. |
 | setItemArray                 | 21                  | Don’t repeat yourself (DRY): Metoden förekommer både i ComputerRow och Theme klassen, vilket går emot DRY-principen, men då metoderna gör lite olika saker i klasserna så bör jag fundera på om jag bör ge någon av metoderna ett tydligare namn. <br> Small: Metoden i Theme klassen är lång och innehåller många if satser och mycket data. Jag bör fundera på om den kan skrivas på något bättre sätt genom att exempelvis hämta innehållet i arrayerna från någon annanstans genom en loop. |

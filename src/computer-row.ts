@@ -28,9 +28,9 @@ class ComputerRow {
      * 
      * @param numberOfItems { number } - number of items that should be included in the computer row.
      */
-    setNumberOfItems(numberOfItems: number) : void {
-        if (numberOfItems === null) {
-            throw new Error('Pls provide a valid number')
+    private setNumberOfItems(numberOfItems: number) : void {
+        if (numberOfItems < 1 || numberOfItems > 8) {
+            throw new Error('Pls provide a number between 1 - 8')
         } else {
             this.numberOfItems = numberOfItems
         }

@@ -8,7 +8,8 @@ var Computer = /** @class */ (function () {
     function Computer(numberOfItems, themeArray) {
         this.computerRow = [];
         this.numberOfGuesses = 0;
-        this.setNumberOfItems(numberOfItems, themeArray);
+        this.setNumberOfItems(numberOfItems);
+        this.createComputerRow(themeArray);
     }
     /**
      * Gets the number of items that is used in the game.
@@ -16,6 +17,9 @@ var Computer = /** @class */ (function () {
      * @returns { number } - number of items used in the game.
      */
     Computer.prototype.getNumberOfItems = function () {
+        if (this.numberOfItems === null) {
+            throw Error('Number of items has not been set');
+        }
         return this.numberOfItems;
     };
     /**
@@ -23,13 +27,12 @@ var Computer = /** @class */ (function () {
     *
     * @param numberOfItems { number } - number of items that should be used in the game.
     */
-    Computer.prototype.setNumberOfItems = function (numberOfItems, themeArray) {
+    Computer.prototype.setNumberOfItems = function (numberOfItems) {
         if (numberOfItems < 1 || numberOfItems > 8) {
             throw new Error('Pls provide a valid number between 1-8');
         }
         else {
             this.numberOfItems = numberOfItems;
-            this.computerRow = this.createComputerRow(themeArray);
         }
     };
     /**
@@ -39,8 +42,13 @@ var Computer = /** @class */ (function () {
      * @returns
      */
     Computer.prototype.createComputerRow = function (themeArray) {
-        var computerRow = new computer_row_1.default(this.numberOfItems, themeArray);
-        return computerRow.generateRow();
+        if (this.numberOfItems !== undefined) {
+            var computerRow = new computer_row_1.default(this.numberOfItems, themeArray);
+            this.computerRow = computerRow.generateRow();
+        }
+        else {
+            throw Error('Number of items has not been set yet');
+        }
     };
     /**
      * Returns an array with the items that represent the current computer row.
@@ -70,7 +78,7 @@ var Computer = /** @class */ (function () {
      */
     Computer.prototype.checkAnswer = function (answer) {
         if (answer.length !== this.computerRow.length) {
-            throw new Error('The guess must contain 8 items');
+            throw new Error("The guess must contain ".concat(this.computerRow.length, " items."));
         }
         var answerFromPlayer = answer;
         var answerWithFeedback = [];

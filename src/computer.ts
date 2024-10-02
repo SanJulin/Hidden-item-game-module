@@ -9,7 +9,8 @@ class Computer {
     private numberOfGuesses: number = 0
 
     constructor(numberOfItems: number, themeArray: string[]) {
-        this.setNumberOfItems(numberOfItems, themeArray)
+        this.setNumberOfItems(numberOfItems)
+        this.createComputerRow(themeArray)
     }
 
     /**
@@ -18,6 +19,9 @@ class Computer {
      * @returns { number } - number of items used in the game.
      */
     getNumberOfItems() : number {
+        if (this.numberOfItems === null) {
+            throw Error('Number of items has not been set')
+        }
         return this.numberOfItems
     }
 
@@ -26,12 +30,11 @@ class Computer {
      * 
      * @param numberOfItems { number } - number of items that should be used in the game.
      */
-    setNumberOfItems(numberOfItems: number, themeArray: string[]) : void{
+    setNumberOfItems(numberOfItems: number) : void{
         if (numberOfItems < 1 || numberOfItems > 8) {
             throw new Error('Pls provide a valid number between 1-8')
         } else {
             this.numberOfItems = numberOfItems
-            this.computerRow = this.createComputerRow(themeArray)
         }
     }
 
@@ -42,9 +45,12 @@ class Computer {
      * @returns 
      */
     private createComputerRow(themeArray: string[]) {
-        const computerRow = new ComputerRow(this.numberOfItems, themeArray)
-
-        return computerRow.generateRow()
+        if (this.numberOfItems !== undefined) {
+            const computerRow = new ComputerRow(this.numberOfItems, themeArray)
+            this.computerRow = computerRow.generateRow()
+        } else {
+            throw Error('Number of items has not been set yet')
+        }
     }
 
     /**
@@ -77,7 +83,7 @@ class Computer {
      */
     public checkAnswer(answer: string[]): any {
         if (answer.length !== this.computerRow.length ) {
-            throw new Error('The guess must contain 8 items')
+            throw new Error(`The guess must contain ${this.computerRow.length} items.`)
         }
         const answerFromPlayer = answer
         let answerWithFeedback = []

@@ -33,18 +33,18 @@ MIT License Copyright (c) 2024 SanJulin
 A new release is expected in October, 2024
 
 ## User contribution
-A newer version of the module will soon be released. Pls contribute by letting me know if you discover any bugs or have ideas on how I can improve the module´s functionality. 
+A newer version of the module will soon be released. Pls contribute by letting me know if you discover any bugs or have any ideas on how I can improve the module. 
 
 ## Examples
 
 ## Testing
 
-## Manual testing of the game
+### Manual testing of the game
 Enter node user-testapp.js to manually test the module by playing the game.
 
-## Computer testing of the game
+### Computer testing of the game
 Enter node ai-testapp.js to see the computer AI playing the game.
 
-## Testing of methods
+### Testing of methods
 Enter node method-testapp.js to see the test result of Class methods. 
 

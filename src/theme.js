@@ -16,7 +16,7 @@ var Theme = /** @class */ (function () {
     * @returns { string } - the theme of the items used in the game.
     */
     Theme.prototype.getTheme = function () {
-        if (this.theme === '') {
+        if (this.theme === undefined) {
             throw new Error('No theme has been set for the game');
         }
         return this.theme;
@@ -28,7 +28,7 @@ var Theme = /** @class */ (function () {
      */
     Theme.prototype.setTheme = function (theme) {
         this.theme = theme;
-        if (this.theme !== '') {
+        if (this.theme !== undefined) {
             this.setItemArray();
         }
         else {
@@ -49,7 +49,12 @@ var Theme = /** @class */ (function () {
      * @returns { string [] } - an array with items.
      */
     Theme.prototype.getItemArray = function () {
-        return this.itemArray;
+        if (this.itemArray.length === 0) {
+            throw Error('ItemArray has not been set for the game.');
+        }
+        else {
+            return this.itemArray;
+        }
     };
     /**
      * Sets the theme and itemArray for other themes than the available themes included in the module. The user of the module must provide a theme name and an array that includes 8 items in order to create a themes of their choice.
@@ -61,8 +66,8 @@ var Theme = /** @class */ (function () {
         if (themeArray.length !== 8) {
             throw Error('The themeArray must contain 8 items.');
         }
-        if (theme === undefined) {
-            throw Error('Pls provide a theme for the game');
+        if (theme === '') {
+            throw Error('Pls provide a theme "name" for the game');
         }
         else {
             this.theme = theme;

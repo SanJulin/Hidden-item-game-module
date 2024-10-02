@@ -49,7 +49,7 @@ while (gameContinues === true) {
     // Takes the input guessed by the user
     var answerInNumbers = readlineSync.question("Pls guess the content in the computer row. choose ".concat(numberOfItems, " numbers to represent your row. "));
     var answer = [];
-    // Creates an array with the items that the user choosed
+    // Creates an array with the items that the user has choosen.
     for (var i = 0; i < answerInNumbers.length; i++) {
         if (answerInNumbers[i] === '1') {
             answer.push(itemOptions[0]);

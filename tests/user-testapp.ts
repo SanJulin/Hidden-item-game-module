@@ -57,7 +57,7 @@ while (gameContinues === true) {
 
     let answer: string[] = []
     
-    // Creates an array with the items that the user choosed
+    // Creates an array with the items that the user has choosen.
     for (let i = 0; i < answerInNumbers.length; i++) {
         if (answerInNumbers[i] === '1') {
             answer.push(itemOptions[0])

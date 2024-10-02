@@ -16,7 +16,7 @@ class Theme {
     * @returns { string } - the theme of the items used in the game.
     */
     public getTheme(): string {
-        if (this.theme === '') {
+        if (this.theme === undefined) {
             throw new Error('No theme has been set for the game')
         }
         return this.theme
@@ -27,9 +27,9 @@ class Theme {
      * 
      * @param theme { string } - the theme of the items used in the game.
      */
-    private setTheme(theme: string) : void {
+    setTheme(theme: string) : void {
         this.theme = theme
-        if (this.theme !== '') {
+        if (this.theme !== undefined) {
             this.setItemArray()
         } else {
             this.theme === ''
@@ -51,7 +51,11 @@ class Theme {
      * @returns { string [] } - an array with items.
      */
     public getItemArray(): string[] {
-        return this.itemArray
+        if (this.itemArray.length === 0) {
+            throw Error('ItemArray has not been set for the game.')
+        } else {
+            return this.itemArray
+        }
     }
 
     /**
@@ -64,8 +68,8 @@ class Theme {
         if (themeArray.length !== 8) {
             throw Error('The themeArray must contain 8 items.')
         } 
-        if (theme === undefined) {
-            throw Error('Pls provide a theme for the game')
+        if (theme === '') {
+            throw Error('Pls provide a theme "name" for the game')
         } else {
             this.theme = theme
             this.itemArray = themeArray
