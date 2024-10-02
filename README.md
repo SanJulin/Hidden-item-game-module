@@ -1,4 +1,4 @@
-# L2
+# L2 - school project in the course 1dv610
 
 ## Overview
 This module can be used as part of a game that is similar to Mastermind, but in this game it will be possible to choose between different themes (flags, animals, colors, professions and movies). It is also possible to create a different theme by sending in a theme description together with an array of items. The developer using this module can choose between creating a user interface for a game played in the console or to create a web application.
@@ -39,12 +39,12 @@ A newer version of the module will soon be released. Pls contribute by letting m
 
 ## Testing
 
-# Manual testing of the game
+## Manual testing of the game
 Enter node user-testapp.js to manually test the module by playing the game.
 
-# Computer testing of the game
-Enter node ai-testapp.js to see the AI playing the game.
+## Computer testing of the game
+Enter node ai-testapp.js to see the computer AI playing the game.
 
-# Testing of methods
+## Testing of methods
 Enter node method-testapp.js to see the test result of Class methods. 
 
