@@ -30,7 +30,7 @@ class Computer {
      * 
      * @param numberOfItems { number } - number of items that should be used in the game.
      */
-    setNumberOfItems(numberOfItems: number) : void{
+    setNumberOfItems(numberOfItems: number) : void {
         if (numberOfItems < 1 || numberOfItems > 8) {
             throw new Error('Pls provide a valid number between 1-8')
         } else {
@@ -44,7 +44,7 @@ class Computer {
      * @param themeArray { string [] } - the array with items from the chosen theme. 
      * @returns 
      */
-    private createComputerRow(themeArray: string[]) {
+    private createComputerRow(themeArray: string[]) : void{
         if (this.numberOfItems !== undefined) {
             const computerRow = new ComputerRow(this.numberOfItems, themeArray)
             this.computerRow = computerRow.generateRow()
@@ -69,7 +69,7 @@ class Computer {
      * Gets the number of guesses used in a playround. 
      * 
      * @returns { number } - number of guesses.
-     */
+    */
     public getNumberOfGuesses(): number {
         return this.numberOfGuesses
     }
@@ -84,7 +84,7 @@ class Computer {
     public checkAnswer(answer: string[]): any {
         if (answer.length !== this.computerRow.length ) {
             throw new Error(`The guess must contain ${this.computerRow.length} items.`)
-        }
+        } 
         const answerFromPlayer = answer
         let answerWithFeedback = []
         let numberOfCorrectItems: number = 0

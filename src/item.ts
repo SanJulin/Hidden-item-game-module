@@ -1,5 +1,5 @@
 /**
- * Class that represents one item in the game.
+ * Class that represents one item in the game. This class is not yet connected to the other classes, but it will be used in the updated version of the module. The ComputerRow and Theme classes will use the Item class to create new Items and the Computer class will use the Item class to change the color of the item. 
  */
 class Item {
     private name : string 
@@ -25,7 +25,7 @@ class Item {
      * 
      * @param theme { string } - the name of the item.
      */
-    private setName(name: string) : void{
+    private setName(name: string) : void {
         if (name === '') {
             throw new Error('The item must have a name') 
         } else {
