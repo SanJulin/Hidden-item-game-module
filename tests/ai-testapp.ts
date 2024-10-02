@@ -1,5 +1,5 @@
-import Computer from './computer'
-import Theme from './theme'
+import Computer from '../src/computer'
+import Theme from '../src/theme'
 
 const themes = ['flags', 'animals', 'colors', 'professions', 'movies']
 const themeIndex = Math.floor(Math.random() * themes.length)
@@ -7,8 +7,6 @@ const newTheme = themes[themeIndex]
 const theme = new Theme(newTheme)
 
 const itemArray = theme.getItemArray()
-
-console.log(`Item options: ${itemArray}`)
 
 const numberOfItems = Math.ceil(Math.random() * 8)
 const computer = new Computer(numberOfItems, itemArray)
@@ -18,6 +16,7 @@ console.log(computer)
 let gameContinues: boolean = true
 
 while (gameContinues === true) {
+    console.log(`Item options: ${itemArray}`)
     let answer : string [] = []
 
     for (let i = 0; i < numberOfItems; i++) {

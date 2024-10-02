@@ -15,6 +15,8 @@ In order to build a web application it is recommended to add the Item class to b
 
 ## Installation
 
+## Programming language 
+The module has been written in Typescript
 
 ## License
 MIT License Copyright (c) 2024 SanJulin
@@ -27,6 +29,9 @@ MIT License Copyright (c) 2024 SanJulin
 ## Version
 1.0.0
 
+## Releases
+A new release is expected in October, 2024
+
 ## User contribution
 A newer version of the module will soon be released. Pls contribute by letting me know if you discover any bugs or have ideas on how I can improve the module´s functionality. 
 
@@ -38,7 +43,7 @@ A newer version of the module will soon be released. Pls contribute by letting m
 Enter node user-testapp.js to manually test the module by playing the game.
 
 # Computer testing of the game
-Enter node computer-testapp.js to see the AI playing the game.
+Enter node ai-testapp.js to see the AI playing the game.
 
 # Testing of methods
 Enter node method-testapp.js to see the test result of Class methods. 

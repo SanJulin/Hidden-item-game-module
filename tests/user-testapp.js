@@ -1,10 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var readlineSync = require("readline-sync");
-var theme_1 = require("./theme");
-var computer_1 = require("./computer");
+var theme_1 = require("../src/theme");
+var computer_1 = require("../src/computer");
+/**
+ * Testing app for playing against the computer.
+ */
+// Takes the input from the user.
 var themeFromUser = readlineSync.question('Pls enter the theme you would like to play with? \n1. flags \n2. animals \n3. colors \n4. professions \n5. movies \n');
 var theme;
+// Checks which theme the input represents
 if (themeFromUser === '1') {
     theme = 'flags';
 }
@@ -20,21 +25,31 @@ else if (themeFromUser === '4') {
 else if (themeFromUser === '5') {
     theme = 'movies';
 }
-var numberOfItems = readlineSync.question('How many items would you like to play with? (1-8) ');
+else {
+    console.log('Not a valid number');
+}
+// Creates a new Theme that sets the theme chosen by the user.
 var gameTheme = new theme_1.default(theme);
+// Takes the input from the user
+var numberOfItems = readlineSync.question('How many items would you like to play with? (1-8) ');
+// Creates an array with options with the theme set for the game.
 var itemOptions = gameTheme.getItemArray();
-console.log(itemOptions);
+//Creates a new computer opponent. 
 var computer = new computer_1.default(numberOfItems, itemOptions);
+//Prints the computer object to make it easier to check if the test result is correct. 
 console.log(computer);
 var gameContinues = true;
 while (gameContinues === true) {
     console.log('Your options:');
+    // Writes out the options that the user can choose between
     for (var i = 1; i <= itemOptions.length; i++) {
         var option = "".concat(i, ". ").concat(itemOptions[i - 1]);
         console.log(option);
     }
+    // Takes the input guessed by the user
     var answerInNumbers = readlineSync.question("Pls guess the content in the computer row. choose ".concat(numberOfItems, " numbers to represent your row. "));
     var answer = [];
+    // Creates an array with the items that the user choosed
     for (var i = 0; i < answerInNumbers.length; i++) {
         if (answerInNumbers[i] === '1') {
             answer.push(itemOptions[0]);
@@ -62,14 +77,11 @@ while (gameContinues === true) {
         }
     }
     console.log("Answer from player: ".concat(answer));
+    //Checks with the computer if the answer is correct.
     var result = computer.checkAnswer(answer);
     var parsedResult = JSON.parse(result);
-    var correct = 0;
-    for (var i = 0; i < parsedResult.length; i++) {
-        if (parsedResult[i].color === 'green') {
-            correct++;
-        }
-    }
+    // Checks if the user has won and prints the resulttext and number of guesses needed if the user won. 
+    // Prints the item + color. Green = correct place. Yellow = wrong place. Red = does not occur in the row.
     if (parsedResult === 'Congratulations! You made it!') {
         console.log(parsedResult);
         console.log("Total number of guesses: ".concat(computer.getNumberOfGuesses()));

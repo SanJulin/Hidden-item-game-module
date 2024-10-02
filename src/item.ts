@@ -25,7 +25,7 @@ class Item {
      * 
      * @param theme { string } - the name of the item.
      */
-    private setName(name: string) {
+    private setName(name: string) : void{
         if (name === '') {
             throw new Error('The item must have a name') 
         } else {
@@ -47,7 +47,7 @@ class Item {
      * 
      * @param id { number } - the id of the item.
      */
-    private setId(id : number){
+    private setId(id : number) : void {
         if (id === null) {
             throw new Error('The item must have an id') 
         } else {
@@ -69,7 +69,7 @@ class Item {
      * 
      * @param theme { string } - the name of the item.
      */
-    public setColor(color: string){
+    public setColor(color: string) : void {
         if (color === 'green' || color === 'yellow' || color === 'red' ) {
             this.color = color
         } else {

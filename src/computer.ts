@@ -26,9 +26,9 @@ class Computer {
      * 
      * @param numberOfItems { number } - number of items that should be used in the game.
      */
-    setNumberOfItems(numberOfItems: number, themeArray: string[]) {
-        if (numberOfItems === null) {
-            throw new Error('Pls provide a valid number')
+    setNumberOfItems(numberOfItems: number, themeArray: string[]) : void{
+        if (numberOfItems < 1 || numberOfItems > 8) {
+            throw new Error('Pls provide a valid number between 1-8')
         } else {
             this.numberOfItems = numberOfItems
             this.computerRow = this.createComputerRow(themeArray)
@@ -77,7 +77,7 @@ class Computer {
      */
     public checkAnswer(answer: string[]): any {
         if (answer.length !== this.computerRow.length ) {
-            throw new Error(`The guess must contain ${this.numberOfItems}`)
+            throw new Error('The guess must contain 8 items')
         }
         const answerFromPlayer = answer
         let answerWithFeedback = []

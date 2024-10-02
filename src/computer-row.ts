@@ -28,7 +28,7 @@ class ComputerRow {
      * 
      * @param numberOfItems { number } - number of items that should be included in the computer row.
      */
-    setNumberOfItems(numberOfItems: number) {
+    setNumberOfItems(numberOfItems: number) : void {
         if (numberOfItems === null) {
             throw new Error('Pls provide a valid number')
         } else {
@@ -41,7 +41,7 @@ class ComputerRow {
      * 
      * @param itemArray string [] - the array with themed items chosen for the game. 
      */
-    private setItemArray(itemArray: string[]) {
+    private setItemArray(itemArray: string[]) : void{
         if (itemArray.length !== 8) {
             throw new Error('The item array must contain 8 items')
         }

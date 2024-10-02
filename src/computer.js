@@ -24,8 +24,8 @@ var Computer = /** @class */ (function () {
     * @param numberOfItems { number } - number of items that should be used in the game.
     */
     Computer.prototype.setNumberOfItems = function (numberOfItems, themeArray) {
-        if (numberOfItems === null) {
-            throw new Error('Pls provide a valid number');
+        if (numberOfItems < 1 || numberOfItems > 8) {
+            throw new Error('Pls provide a valid number between 1-8');
         }
         else {
             this.numberOfItems = numberOfItems;
@@ -70,7 +70,7 @@ var Computer = /** @class */ (function () {
      */
     Computer.prototype.checkAnswer = function (answer) {
         if (answer.length !== this.computerRow.length) {
-            throw new Error("The guess must contain ".concat(this.numberOfItems));
+            throw new Error('The guess must contain 8 items');
         }
         var answerFromPlayer = answer;
         var answerWithFeedback = [];

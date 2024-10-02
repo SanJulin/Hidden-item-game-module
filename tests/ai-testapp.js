@@ -1,18 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var computer_1 = require("./computer");
-var theme_1 = require("./theme");
+var computer_1 = require("../src/computer");
+var theme_1 = require("../src/theme");
 var themes = ['flags', 'animals', 'colors', 'professions', 'movies'];
 var themeIndex = Math.floor(Math.random() * themes.length);
-var thisTheme = themes[themeIndex];
-var theme = new theme_1.default(thisTheme);
+var newTheme = themes[themeIndex];
+var theme = new theme_1.default(newTheme);
 var itemArray = theme.getItemArray();
-console.log("Item options: ".concat(itemArray));
 var numberOfItems = Math.ceil(Math.random() * 8);
 var computer = new computer_1.default(numberOfItems, itemArray);
 console.log(computer);
 var gameContinues = true;
 while (gameContinues === true) {
+    console.log("Item options: ".concat(itemArray));
     var answer = [];
     for (var i = 0; i < numberOfItems; i++) {
         var guessIndex = Math.floor(Math.random() * itemArray.length);

@@ -1,11 +1,17 @@
 import * as readlineSync from 'readline-sync';
-import Theme from './theme';
-import Computer from './computer';
+import Theme from '../src/theme';
+import Computer from '../src/computer';
 
+/**
+ * Testing app for playing against the computer.
+ */
+
+// Takes the input from the user.
 const themeFromUser = readlineSync.question('Pls enter the theme you would like to play with? \n1. flags \n2. animals \n3. colors \n4. professions \n5. movies \n')
 
 let theme: string
 
+// Checks which theme the input represents
 if (themeFromUser === '1') {
     theme = 'flags'
 } else if (themeFromUser === '2') {
@@ -16,32 +22,42 @@ if (themeFromUser === '1') {
     theme = 'professions'
 } else if (themeFromUser === '5') {
     theme = 'movies'
+} else {
+    console.log('Not a valid number')
 }
 
-const numberOfItems = readlineSync.question('How many items would you like to play with? (1-8) ');
-
+// Creates a new Theme that sets the theme chosen by the user.
 const gameTheme = new Theme(theme)
 
-const itemOptions = gameTheme.getItemArray()
-console.log(itemOptions)
+// Takes the input from the user
+const numberOfItems = readlineSync.question('How many items would you like to play with? (1-8) ')
 
+// Creates an array with options with the theme set for the game.
+const itemOptions = gameTheme.getItemArray()
+
+//Creates a new computer opponent. 
 const computer = new Computer(numberOfItems, itemOptions)
 
-console.log(computer);
+//Prints the computer object to make it easier to check if the test result is correct. 
+console.log(computer)
 
 let gameContinues: boolean = true
 
 while (gameContinues === true) {
     console.log('Your options:')
+
+    // Writes out the options that the user can choose between
     for (let i = 1; i <= itemOptions.length; i++) {
         const option = `${i}. ${itemOptions[i - 1]}`
         console.log(option)
     }
 
+    // Takes the input guessed by the user
     const answerInNumbers = readlineSync.question(`Pls guess the content in the computer row. choose ${numberOfItems} numbers to represent your row. `)
 
     let answer: string[] = []
-
+    
+    // Creates an array with the items that the user choosed
     for (let i = 0; i < answerInNumbers.length; i++) {
         if (answerInNumbers[i] === '1') {
             answer.push(itemOptions[0])
@@ -62,15 +78,13 @@ while (gameContinues === true) {
         }
     }
     console.log(`Answer from player: ${answer}`)
+
+    //Checks with the computer if the answer is correct.
     let result = computer.checkAnswer(answer)
     let parsedResult = JSON.parse(result)
 
-    let correct: number = 0
-    for (let i = 0; i < parsedResult.length; i++) {
-        if (parsedResult[i].color === 'green') {
-            correct++
-        }
-    }
+    // Checks if the user has won and prints the resulttext and number of guesses needed if the user won. 
+    // Prints the item + color. Green = correct place. Yellow = wrong place. Red = does not occur in the row.
     if (parsedResult === 'Congratulations! You made it!') {
         console.log(parsedResult)
         console.log(`Total number of guesses: ${computer.getNumberOfGuesses()}`)

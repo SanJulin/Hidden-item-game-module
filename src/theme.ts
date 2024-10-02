@@ -27,7 +27,7 @@ class Theme {
      * 
      * @param theme { string } - the theme of the items used in the game.
      */
-    private setTheme(theme: string) {
+    private setTheme(theme: string) : void {
         this.theme = theme
         if (this.theme !== '') {
             this.setItemArray()
@@ -55,12 +55,12 @@ class Theme {
     }
 
     /**
-     * 
+     * Sets the theme and itemArray for other themes than the available themes included in the module. The user of the module must provide a theme name and an array that includes 8 items in order to create a themes of their choice.
      * 
      * @param theme { string } - the name of the theme
      * @param themeArray { string [] } - the array with 8 items that should be included in the itemArray.
      */
-    public useOtherTheme(theme: string, themeArray: string[]) {
+    public setOtherTheme(theme: string, themeArray: string[]) : void {
         if (themeArray.length !== 8) {
             throw Error('The themeArray must contain 8 items.')
         } 
@@ -75,7 +75,7 @@ class Theme {
     /**
      * Checks if this.theme is undefined and throws an error if it is. Sets the array with items that should be used in the game by checking what the current theme is.  
      */
-    private setItemArray() {
+    private setItemArray() : void {
         if (this.theme !== undefined) {
             if (this.theme === 'flags') {
                 this.itemArray = ['sweden', 'japan', 'italy', 'norway', 'kenya', 'china', 'brazil', 'uk']
