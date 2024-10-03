@@ -140,11 +140,11 @@ Sets the color for the current item that is used in the game, depending on if th
 
 ### Code examples
 
-![code example](/img/code-example.png)
+![code example](./img/code-example.png)
 
-![code example2](/img/code-example2.png)
+![code example2](./img/code-example2.png)
 
 ### Game example
 
-![game example](/img/game-example.png)
+![game example](./img/game-example.png)
 
