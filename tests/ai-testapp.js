@@ -23,7 +23,9 @@ var computer = new computer_1.default(numberOfItems, itemArray);
 console.log(computer);
 var gameContinues = true;
 while (gameContinues === true) {
-    console.log("Item options: ".concat(itemArray));
+    for (var i = 0; i < itemArray.length; i++) {
+        console.log("Item options: ".concat(JSON.stringify(itemArray[i])));
+    }
     // Creates an array with the items that the AI has choosen.
     var answer = [];
     for (var i = 0; i < numberOfItems; i++) {
@@ -31,7 +33,7 @@ while (gameContinues === true) {
         var guess = itemArray[guessIndex];
         answer.push(guess);
     }
-    console.log("Answer from user: ".concat(answer));
+    console.log("Answer from user: ".concat(JSON.stringify(answer)));
     //Checks with the computer if the answer is correct.
     var result = computer.checkAnswer(answer);
     var parsedResult = JSON.parse(result);

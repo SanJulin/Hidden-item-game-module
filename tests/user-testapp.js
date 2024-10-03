@@ -40,14 +40,11 @@ var computer = new computer_1.default(numberOfItems, itemOptions);
 console.log(computer);
 var gameContinues = true;
 while (gameContinues === true) {
-    console.log('Your options:');
     // Writes out the options that the user can choose between
-    for (var i = 1; i <= itemOptions.length; i++) {
-        var option = "".concat(i, ". ").concat(itemOptions[i - 1]);
-        console.log(option);
-    }
+    console.log('Your options:');
+    console.log(itemOptions);
     // Takes the input guessed by the user
-    var answerInNumbers = readlineSync.question("Pls guess the content in the computer row. choose ".concat(numberOfItems, " numbers to represent your row. "));
+    var answerInNumbers = readlineSync.question("Pls guess the content in the computer row. choose ".concat(numberOfItems, " (id) numbers to represent your row. "));
     var answer = [];
     // Creates an array with the items that the user has choosen.
     for (var i = 0; i < answerInNumbers.length; i++) {
@@ -76,9 +73,9 @@ while (gameContinues === true) {
             answer.push(itemOptions[7]);
         }
     }
-    console.log("Answer from player: ".concat(answer));
+    console.log("Answer from player: ".concat(JSON.stringify(answer)));
     //Checks with the computer if the answer is correct.
-    var result = computer.checkAnswer(answer);
+    var result = computer.checkAnswer((answer));
     var parsedResult = JSON.parse(result);
     // Checks if the user has won and prints the resulttext and number of guesses needed if the user won. 
     // Prints the item + color. Green = correct place. Yellow = wrong place. Red = does not occur in the row.

@@ -1,17 +1,15 @@
-# L2 - school project
+# L2 
+### School project in 1dv610
 
 ## Overview
-This module can be used as part of a game that is similar to Mastermind, but in this game it will be possible to choose between different themes (flags, animals, colors, professions and movies). It is also possible to create a different theme by sending in a theme description together with an array of items. The developer using this module can choose between creating a user interface for a game played in the console or to create a web application.
+This module can be used as part of a game that is similar to Mastermind, but in this game it will be possible to choose between different themes (flags, animals, colors, professions and movies). It is also possible to create a different theme by sending in a theme description together with an array of items. The developer using this module can choose between creating an user interface for a game played in the console or to create a web application.
 
 ## Game idea
-The idea of the game is that the user should choose a theme that contains 8 items/bricks and decide how many items the computer should use in the row. The computer uses the 8 items to create a random row with as many items as the user wanted. It is then up to the user to guess the secret row, by entering a combination of items. If the item is in the correct place it will receive color green. If it is in the wrong place it will receive color yellow and color red will let the user know the the item is not represented in the row. When all items are in the correct place, the game will end and it will be possible to get info regarding how many guesses that the user used. 
+The idea of the game is that the user should choose a theme that contains 8 items and decide how many items the computer should use in the row. The computer uses the 8 items to create a random row with as many items as the user wanted. It is then up to the user to guess the secret row, by entering a combination of items. If the item is in the correct place it will receive color green. If it is in the wrong place it will receive color yellow and color red will let the user know the the item is not represented in the row. When all items are in the correct place, the game will end and it will be possible to get info regarding how many guesses that the user has used in the game round. 
 
-## Console application
+## Console or Web application
 
-The current version of the module can be used for a console application if the user of this module develops an user interface. It is enough to use the Computer, ComputerRow and the Theme classes, to develop a console application, but with some modifications of the module it would be possible to also include the Item class for a more flexible application.
-
-## Web application
-In order to build a web application it is recommended to add the Item class to be able to handle the items in an easier way. One solution would be to use the Item class to create bricks with images of the items. Images of flags are included in the package, but future versions will also includes images of other themes. It is also possible to add other images and themes to create an application with the theme that you prefer. One suggestion is to use the color of the item to create a border around the item/brick/image to show the play if the item is in the correct place.   
+The module can be used to create a console application if the user of this module develops an user interface. Another possibility is to create a web application. One solution would be to use the Item class to create bricks with images of the items. Images of flags are included in the package, but future versions will also include images of other themes. It is also possible to add other images and themes to create an application with the theme of your choise. One suggestion is to use the color of the item to create a border around the item/brick/image to show the player if the item is in the correct place or not.   
 
 ## Installation
 
@@ -24,6 +22,7 @@ Install Typescript if you it is not already installed, by typing: npm install -g
 Navigate to folder L2/tests to see the available tests and check the below testing info for further instructions. 
 
 ## Testing
+Testing has been done for a previous version of the module (https://github.com/SanJulin/L2/commit/9cd26d3a9dc0b29eba3bfc3a28e57a3ab63ff077)
 
 ### Manual testing of the game
 Enter node user-testapp.js to manually test the module by playing the game.
@@ -35,7 +34,7 @@ Enter node ai-testapp.js to see the computer AI playing the game.
 Enter node method-testapp.js to see the test result of Class methods. 
 
 ## Programming language 
-The module has been written in Typescript, Javascript and Node.js
+The module has been written in Typescript and Javascript.
 
 ## License
 MIT License Copyright (c) 2024 SanJulin
@@ -50,7 +49,7 @@ TypeScript
 1.0.0
 
 ## Releases
-A new release is expected in October, 2024. The ComputerRow and Theme classes will use the Item class to create new Items in the updated version of the module and the Computer class will use the Item class to change the color of the item. 
+A new release is expected in October, 2024. 
 
 ## User contribution
 A newer version of the module will soon be released. Pls contribute by letting me know if you discover any bugs or have any ideas on how I can improve the module. 
@@ -137,6 +136,12 @@ Sets the color for the current item that is used in the game, depending on if th
 
 ## Examples
 
+### Code examples
+
 ![code example](./img-examples/code-example.png)
+
+![code example](./img-examples/code-example2.png)
+
+### Game example
 
 ![game example](./img-examples/game-example.png)

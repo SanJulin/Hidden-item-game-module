@@ -1,14 +1,14 @@
 /**
- * Class that represents one item in the game. This class is not yet connected to the other classes, but it will be used in the updated version of the module. The ComputerRow and Theme classes will use the Item class to create new Items and the Computer class will use the Item class to change the color of the item. 
+ * Class that represents one item in the game. 
  */
 class Item {
-    private name : string 
     private id : number
+    private name : string 
     private color: string = ''
 
-    constructor(name : string, id: number) {
-        this.setName(name)
+    constructor(id: number, name : string) {
         this.setId(id)
+        this.setName(name)
     }
 
     /**

@@ -1,12 +1,14 @@
+import Item from "./item"
+
 /**
  * Class that represents the computer row with items that the Computer is creating.  
  */
 class ComputerRow {
     private numberOfItems: number
-    private itemArray: string[]
-    private computerRow: string[] = []
+    private itemArray: object[]
+    private computerRow: object[] = []
 
-    constructor(numberOfItems: number, itemArray: string[]) {
+    constructor(numberOfItems: number, itemArray: object[]) {
         this.setNumberOfItems(numberOfItems)
         this.setItemArray(itemArray)
     }
@@ -39,9 +41,9 @@ class ComputerRow {
     /**
      * Sets the itemArray if there are 8 items in the provided array.
      * 
-     * @param itemArray string [] - the array with themed items chosen for the game. 
+     * @param itemArray object [] - the array with themed items chosen for the game. 
      */
-    private setItemArray(itemArray: string[]) : void{
+    private setItemArray(itemArray: object[]) : void{
         if (itemArray.length !== 8) {
             throw new Error('The item array must contain 8 items')
         }
@@ -51,9 +53,9 @@ class ComputerRow {
     /**
      * Creates a random row based on the itemArray and returns it to the computer. 
      * 
-     * @returns {string [] } - A row with items. 
+     * @returns {object [] } - A row with items. 
      */
-    public generateRow(): string[] {
+    public generateRow(): object[] {
         const rowLength = this.numberOfItems
         for (let i = 0; i < rowLength; i++) {
             const nextItemIndex = Math.floor(Math.random() * this.itemArray.length)

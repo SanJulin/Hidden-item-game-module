@@ -44,18 +44,15 @@ console.log(computer)
 let gameContinues: boolean = true
 
 while (gameContinues === true) {
-    console.log('Your options:')
 
     // Writes out the options that the user can choose between
-    for (let i = 1; i <= itemOptions.length; i++) {
-        const option = `${i}. ${itemOptions[i - 1]}`
-        console.log(option)
-    }
+    console.log('Your options:')
+    console.log(itemOptions)
 
     // Takes the input guessed by the user
-    const answerInNumbers = readlineSync.question(`Pls guess the content in the computer row. choose ${numberOfItems} numbers to represent your row. `)
+    const answerInNumbers = readlineSync.question(`Pls guess the content in the computer row. choose ${numberOfItems} (id) numbers to represent your row. `)
 
-    let answer: string[] = []
+    let answer: object[] = []
     
     // Creates an array with the items that the user has choosen.
     for (let i = 0; i < answerInNumbers.length; i++) {
@@ -77,10 +74,10 @@ while (gameContinues === true) {
             answer.push(itemOptions[7])
         }
     }
-    console.log(`Answer from player: ${answer}`)
+    console.log(`Answer from player: ${JSON.stringify(answer)}`)
 
     //Checks with the computer if the answer is correct.
-    let result = computer.checkAnswer(answer)
+    let result = computer.checkAnswer((answer))
     let parsedResult = JSON.parse(result)
 
     // Checks if the user has won and prints the resulttext and number of guesses needed if the user won. 

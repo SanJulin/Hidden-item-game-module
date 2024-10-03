@@ -32,17 +32,20 @@ console.log(computer)
 let gameContinues: boolean = true
 
 while (gameContinues === true) {
-    console.log(`Item options: ${itemArray}`)
+
+    for (let i = 0; i < itemArray.length; i++) {
+        console.log(`Item options: ${JSON.stringify(itemArray[i])}`)
+    }
 
     // Creates an array with the items that the AI has choosen.
-    let answer : string [] = []
+    let answer : object [] = []
     for (let i = 0; i < numberOfItems; i++) {
         const guessIndex = Math.floor(Math.random() * itemArray.length)
         const guess = itemArray[guessIndex]
         answer.push(guess)
     }
     
-    console.log(`Answer from user: ${answer}`)
+    console.log(`Answer from user: ${JSON.stringify(answer)}`)
 
     //Checks with the computer if the answer is correct.
     let result = computer.checkAnswer(answer)

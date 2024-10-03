@@ -36,7 +36,7 @@ var ComputerRow = /** @class */ (function () {
     /**
      * Sets the itemArray if there are 8 items in the provided array.
      *
-     * @param itemArray string [] - the array with themed items chosen for the game.
+     * @param itemArray object [] - the array with themed items chosen for the game.
      */
     ComputerRow.prototype.setItemArray = function (itemArray) {
         if (itemArray.length !== 8) {
@@ -47,7 +47,7 @@ var ComputerRow = /** @class */ (function () {
     /**
      * Creates a random row based on the itemArray and returns it to the computer.
      *
-     * @returns {string [] } - A row with items.
+     * @returns {object [] } - A row with items.
      */
     ComputerRow.prototype.generateRow = function () {
         var rowLength = this.numberOfItems;

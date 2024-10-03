@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var item_1 = require("./item");
 /**
  * Class that represents the theme of the game.
  */
@@ -29,7 +30,7 @@ var Theme = /** @class */ (function () {
     Theme.prototype.setTheme = function (theme) {
         this.theme = theme;
         if (this.theme !== undefined) {
-            this.setItemArray();
+            this.setThemeArray();
         }
         else {
             this.theme === '';
@@ -46,21 +47,21 @@ var Theme = /** @class */ (function () {
     /**
      * Gets the current array with items.
      *
-     * @returns { string [] } - an array with items.
+     * @returns { object [] } - an array with items.
      */
     Theme.prototype.getItemArray = function () {
-        if (this.itemArray.length === 0) {
-            throw Error('ItemArray has not been set for the game.');
-        }
-        else {
+        try {
             return this.itemArray;
+        }
+        catch (error) {
+            console.log(error);
         }
     };
     /**
      * Sets the theme and itemArray for other themes than the available themes included in the module. The user of the module must provide a theme name and an array that includes 8 items in order to create a themes of their choice.
      *
      * @param theme { string } - the name of the theme
-     * @param themeArray { string [] } - the array with 8 items that should be included in the itemArray.
+     * @param themeArray { object [] } - the array with 8 items that should be included in the itemArray.
      */
     Theme.prototype.setOtherTheme = function (theme, themeArray) {
         if (themeArray.length !== 8) {
@@ -77,26 +78,38 @@ var Theme = /** @class */ (function () {
     /**
      * Checks if this.theme is undefined and throws an error if it is. Sets the array with items that should be used in the game by checking what the current theme is.
      */
-    Theme.prototype.setItemArray = function () {
+    Theme.prototype.setThemeArray = function () {
         if (this.theme !== undefined) {
             if (this.theme === 'flags') {
-                this.itemArray = ['sweden', 'japan', 'italy', 'norway', 'kenya', 'china', 'brazil', 'uk'];
+                this.themeArray = ['sweden', 'japan', 'italy', 'norway', 'kenya', 'china', 'brazil', 'uk'];
             }
             if (this.theme === 'animals') {
-                this.itemArray = ['tiger', 'elefant', 'gorilla', 'whale', 'giraff', 'zebra', 'bear', 'crocodile'];
+                this.themeArray = ['tiger', 'elefant', 'gorilla', 'whale', 'giraff', 'zebra', 'bear', 'crocodile'];
             }
             if (this.theme === 'colors') {
-                this.itemArray = ['red', 'blue', 'green', 'yellow', 'pink', 'black', 'white', 'purple'];
+                this.themeArray = ['red', 'blue', 'green', 'yellow', 'pink', 'black', 'white', 'purple'];
             }
             if (this.theme === 'professions') {
-                this.itemArray = ['police', 'doctor', 'pilot', 'developer', 'teacher', 'administrator', 'actor', 'chef'];
+                this.themeArray = ['police', 'doctor', 'pilot', 'developer', 'teacher', 'administrator', 'actor', 'chef'];
             }
             if (this.theme === 'movies') {
-                this.itemArray = ['titanic', 'leon', 'matrix', 'pulp fiction', 'casablanca', 'lord of the rings', 'alive', 'the shawshank redemption'];
+                this.themeArray = ['titanic', 'leon', 'matrix', 'pulp fiction', 'casablanca', 'lord of the rings', 'alive', 'the shawshank redemption'];
             }
         }
         else {
             throw new Error('There is no theme set for the game');
+        }
+        this.createItemArray();
+    };
+    Theme.prototype.createItemArray = function () {
+        if (this.themeArray !== undefined) {
+            for (var i = 0; i < this.themeArray.length; i++) {
+                var item = new item_1.default(i + 1, this.themeArray[i]);
+                this.itemArray.push(item);
+            }
+        }
+        else {
+            throw Error('There is not themeArray set for the game');
         }
     };
     return Theme;

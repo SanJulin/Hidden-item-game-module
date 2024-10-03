@@ -4,10 +4,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Class that represents one item in the game.
  */
 var Item = /** @class */ (function () {
-    function Item(name, id) {
+    function Item(id, name) {
         this.color = '';
-        this.setName(name);
         this.setId(id);
+        this.setName(name);
     }
     /**
      * Gets the name of the current item used in the game.

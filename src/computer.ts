@@ -4,11 +4,11 @@ import  ComputerRow from './computer-row';
  * Class that represents the computer in the game.
  */
 class Computer {
-    private computerRow: string[] = []
+    private computerRow: object[] = []
     private numberOfItems: number
     private numberOfGuesses: number = 0
 
-    constructor(numberOfItems: number, themeArray: string[]) {
+    constructor(numberOfItems: number, themeArray: object[]) {
         this.setNumberOfItems(numberOfItems)
         this.createComputerRow(themeArray)
     }
@@ -41,10 +41,10 @@ class Computer {
     /**
      * Creates a new instance of the ComputerRow class and calls the generateRow method in the ComputerRow class in order to generate a new row that will represent the computer´s row of items.
      * 
-     * @param themeArray { string [] } - the array with items from the chosen theme. 
+     * @param themeArray { object [] } - the array with items from the chosen theme. 
      * @returns 
      */
-    private createComputerRow(themeArray: string[]) : void{
+    private createComputerRow(themeArray: object[]) : void{
         if (this.numberOfItems !== undefined) {
             const computerRow = new ComputerRow(this.numberOfItems, themeArray)
             this.computerRow = computerRow.generateRow()
@@ -56,9 +56,9 @@ class Computer {
     /**
      * Returns an array with the items that represent the current computer row.
      * 
-     * @returns { string [] } - an array with items
+     * @returns { object [] } - an array with items
      */
-    getComputerRow(): string[] {
+    getComputerRow(): object[] {
         if (this.computerRow === undefined) {
             throw new Error('The computer row has not been created yet')
         }
@@ -77,11 +77,11 @@ class Computer {
     /**
      * Method that checks if the row of items provided by the user matches the computer´s row by checking if the item and the position of the item is the same. An object is created for each item. If the item is in the correct place - the item will get the color green. If the item is present in the row, but in the wrong place - the item will get the color yellow and the color red will be used for items that are not present in the computer´s row. 
      * 
-     * @param answer { string [] } - array with items from the user
+     * @param answer { object [] } - array with items from the user
      * @returns { string } - A text if the user´s guess was correct.
      * @returns { object [] } - An array with objects if the user´s guess wasn´t correct. 
      */
-    public checkAnswer(answer: string[]): any {
+    public checkAnswer(answer: object[]): any {
         if (answer.length !== this.computerRow.length ) {
             throw new Error(`The guess must contain ${this.computerRow.length} items.`)
         } 
@@ -93,6 +93,7 @@ class Computer {
             let itemObject: object = { item: String, color: String }
             if (answerFromPlayer[i] === this.computerRow[i]) {
                 numberOfCorrectItems++
+                answerFromPlayer[i]
                 itemObject = { item: answerFromPlayer[i], color: 'green' }
             } else if (this.computerRow.includes(answerFromPlayer[i])) {
                 itemObject = { item: answerFromPlayer[i], color: 'yellow' }

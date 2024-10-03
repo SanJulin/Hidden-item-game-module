@@ -38,7 +38,7 @@ var Computer = /** @class */ (function () {
     /**
      * Creates a new instance of the ComputerRow class and calls the generateRow method in the ComputerRow class in order to generate a new row that will represent the computer´s row of items.
      *
-     * @param themeArray { string [] } - the array with items from the chosen theme.
+     * @param themeArray { object [] } - the array with items from the chosen theme.
      * @returns
      */
     Computer.prototype.createComputerRow = function (themeArray) {
@@ -53,7 +53,7 @@ var Computer = /** @class */ (function () {
     /**
      * Returns an array with the items that represent the current computer row.
      *
-     * @returns { string [] } - an array with items
+     * @returns { object [] } - an array with items
      */
     Computer.prototype.getComputerRow = function () {
         if (this.computerRow === undefined) {
@@ -65,14 +65,14 @@ var Computer = /** @class */ (function () {
      * Gets the number of guesses used in a playround.
      *
      * @returns { number } - number of guesses.
-     */
+    */
     Computer.prototype.getNumberOfGuesses = function () {
         return this.numberOfGuesses;
     };
     /**
      * Method that checks if the row of items provided by the user matches the computer´s row by checking if the item and the position of the item is the same. An object is created for each item. If the item is in the correct place - the item will get the color green. If the item is present in the row, but in the wrong place - the item will get the color yellow and the color red will be used for items that are not present in the computer´s row.
      *
-     * @param answer { string [] } - array with items from the user
+     * @param answer { object [] } - array with items from the user
      * @returns { string } - A text if the user´s guess was correct.
      * @returns { object [] } - An array with objects if the user´s guess wasn´t correct.
      */
@@ -87,6 +87,7 @@ var Computer = /** @class */ (function () {
             var itemObject = { item: String, color: String };
             if (answerFromPlayer[i] === this.computerRow[i]) {
                 numberOfCorrectItems++;
+                answerFromPlayer[i];
                 itemObject = { item: answerFromPlayer[i], color: 'green' };
             }
             else if (this.computerRow.includes(answerFromPlayer[i])) {
