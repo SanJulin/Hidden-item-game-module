@@ -1,5 +1,3 @@
-import Item from "./item"
-
 /**
  * Class that represents the computer row with items that the Computer is creating.  
  */
@@ -18,7 +16,7 @@ class ComputerRow {
      * 
      * @returns { number } - number of items included in the computer row.
      */
-    getNumberOfItems(): number {
+    public getNumberOfItems(): number {
         if (this.numberOfItems === null) {
             throw new Error('Number of items has not been set for the game')
         }

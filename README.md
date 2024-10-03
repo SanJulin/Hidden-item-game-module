@@ -22,7 +22,6 @@ Install Typescript if you it is not already installed, by typing: npm install -g
 Navigate to folder L2/tests to see the available tests and check the below testing info for further instructions. 
 
 ## Testing
-Testing has been done for a previous version of the module (https://github.com/SanJulin/L2/commit/9cd26d3a9dc0b29eba3bfc3a28e57a3ab63ff077)
 
 ### Manual testing of the game
 Enter node user-testapp.js to manually test the module by playing the game.
@@ -141,10 +140,11 @@ Sets the color for the current item that is used in the game, depending on if th
 
 ### Code examples
 
-![code example](./img-examples/code-example.png)
+![code example](/img/code-example.png)
 
-![code example](./img-examples/code-example2.png)
+![code example2](/img/code-example2.png)
 
 ### Game example
 
-![game example](./img-examples/game-example.png)
+![game example](/img/game-example.png)
+

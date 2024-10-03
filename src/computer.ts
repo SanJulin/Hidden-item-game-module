@@ -18,7 +18,7 @@ class Computer {
      * 
      * @returns { number } - number of items used in the game.
      */
-    getNumberOfItems() : number {
+    public getNumberOfItems() : number {
         if (this.numberOfItems === null) {
             throw Error('Number of items has not been set')
         }
@@ -30,7 +30,7 @@ class Computer {
      * 
      * @param numberOfItems { number } - number of items that should be used in the game.
      */
-    setNumberOfItems(numberOfItems: number) : void {
+    public setNumberOfItems(numberOfItems: number) : void {
         if (numberOfItems < 1 || numberOfItems > 8) {
             throw new Error('Pls provide a valid number between 1-8')
         } else {
@@ -58,7 +58,7 @@ class Computer {
      * 
      * @returns { object [] } - an array with items
      */
-    getComputerRow(): object[] {
+    public getComputerRow(): object[] {
         if (this.computerRow === undefined) {
             throw new Error('The computer row has not been created yet')
         }
@@ -93,7 +93,6 @@ class Computer {
             let itemObject: object = { item: String, color: String }
             if (answerFromPlayer[i] === this.computerRow[i]) {
                 numberOfCorrectItems++
-                answerFromPlayer[i]
                 itemObject = { item: answerFromPlayer[i], color: 'green' }
             } else if (this.computerRow.includes(answerFromPlayer[i])) {
                 itemObject = { item: answerFromPlayer[i], color: 'yellow' }

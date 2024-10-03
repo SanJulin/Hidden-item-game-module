@@ -30,7 +30,7 @@ class Theme {
      * 
      * @param theme { string } - the theme of the items used in the game.
      */
-    setTheme(theme: string): void {
+    public setTheme(theme: string): void {
         this.theme = theme
         if (this.theme !== undefined) {
             this.setThemeArray()
@@ -59,7 +59,6 @@ class Theme {
         } catch (error) {
             console.log(error)
         }
-
     }
 
     /**

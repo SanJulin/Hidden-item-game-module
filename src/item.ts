@@ -61,6 +61,9 @@ class Item {
      * @returns { string } - the color of the current item.
      */
     public getColor(): string {
+        if (this.color === undefined) {
+            throw Error('No color has been set for the item')
+        }
         return this.color
     }
 
