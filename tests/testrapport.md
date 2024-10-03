@@ -1,6 +1,8 @@
 # TestRapport
 
-### Jag har skrivit 3 testfiler för att kunna testa koden på olika sätt. Testningen är gjord på filerna som commitats med texten: "Updating testing files and report". https://github.com/SanJulin/L2/commit/9cd26d3a9dc0b29eba3bfc3a28e57a3ab63ff077. Den versionen ger en lite snyggare utskrift än den senaste versionen. 
+Jag har skrivit 3 testfiler för att kunna testa koden på olika sätt. 
+
+Testrapporten är baserat på resultatet av utskriften som genererades i en tidigare version av koden som finns i commit: "Updating testing files and report". https://github.com/SanJulin/L2/commit/9cd26d3a9dc0b29eba3bfc3a28e57a3ab63ff077. 
 
 ## Manuell testning
 Skriv node user-testapp.js för att köra en manuell version av spelet där du som användare får testa med olika input. 
@@ -22,22 +24,22 @@ Skriv node method-testapp.js för att se resultatet av separata tester av klassm
 
 ### Testning Theme class med korrekt input 
 
-![theme class testing](./test-img/theme-test.png)
+![theme class testing](./test-img/testresult-theme.png)
 
 
 ### Testning Computer class med korrekt input 
 
-![computer class testing](./test-img/computer-test.png)
+![computer class testing](./test-img/testresult-computer.png)
 
 
 ### Testning ComputerRow class med korrekt input 
 
-![computerrow class testing](./test-img/computer-row-test.png)
+![computerrow class testing](./test-img/testresult-computer-row.png)
 
 
 ### Testning Item class med korrekt input 
 
-![item class testing](./test-img/item-test.png)
+![item class testing](./test-img/testresult-item.png)
 
 
 ## Testning av publika metoder med felaktig input (olika klasser)
