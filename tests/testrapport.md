@@ -1,6 +1,6 @@
 # TestRapport
 
-### Jag har skrivit 3 testfiler för att kunna testa koden på olika sätt. 
+### Jag har skrivit 3 testfiler för att kunna testa koden på olika sätt. Testningen är gjord på filerna som commitats med texten: "Updating testing files and report". https://github.com/SanJulin/L2/commit/9cd26d3a9dc0b29eba3bfc3a28e57a3ab63ff077. Den versionen ger en lite snyggare utskrift än den senaste versionen. 
 
 ## Manuell testning
 Skriv node user-testapp.js för att köra en manuell version av spelet där du som användare får testa med olika input. 

@@ -70,11 +70,14 @@ Gets all the themes available in the current version of the module.
 #### `setItemArray() : void`
 Sets the array with items that should be used in the game by checking what the current theme is.  
 
-#### `getItemArray(): string[]`
+#### `getItemArray(): object[]`
 Gets the current array with items. 
 
-#### `setOtherTheme(theme: string, themeArray: string[]) : void`
+#### `setOtherTheme(theme: string, themeArray: object[]) : void`
 Sets the theme and itemArray for other themes than the available themes included in the module. The user of the module must provide a theme name and an array that includes 8 items in order to create a themes of their choice.
+
+#### `createItemArray()`
+Creates an array with items based on the provided theme array. 
 
 
 ### Computer Methods
@@ -85,16 +88,16 @@ Gets the number of items that is used in the game.
 #### `setNumberOfItems(numberOfItems: number) : void`
 Sets the number of items that should be included in the computer row.
 
-#### `createComputerRow(themeArray: string[]) : void`
+#### `createComputerRow(themeArray: object[]) : void`
 Creates a new instance of the ComputerRow class and calls the generateRow method in the ComputerRow class in order to generate a new row that will represent the computer´s row of items.
 
-#### `getComputerRow(): string[]`
+#### `getComputerRow(): object[]`
 Returns an array with the items that represent the current computer row.
 
 #### `getNumberOfGuesses(): number`
 Gets the number of guesses used in a playround. 
 
-#### `checkAnswer(answer: string[]): any`
+#### `checkAnswer(answer: object[]): any`
 Method that checks if the row of items provided by the user matches the computer´s row by checking if the item and the position of the item is the same. An object is created for each item. If the item is in the correct place - the item will get the color green. If the item is present in the row, but in the wrong place - the item will get the color yellow and the color red will be used for items that are not present in the computer´s row.
 
 
@@ -106,10 +109,10 @@ Gets the number of items that is included in the computer row.
 #### `setNumberOfItems(numberOfItems: number) : void`
 Sets the number of items that should be included in the computer row.
 
-#### `setItemArray(itemArray: string[]) : void`
+#### `setItemArray(itemArray: object[]) : void`
 Sets the itemArray if there are 8 items in the provided array.
 
-#### `generateRow(): string[]`
+#### `generateRow(): object[]`
 Creates a random row based on the itemArray and returns it to the computer. 
 
 

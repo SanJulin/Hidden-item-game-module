@@ -106,6 +106,9 @@ class Theme {
         this.createItemArray()
     }
 
+    /**
+     * Creates an array with items based on the provided theme array. 
+     */
     private createItemArray() {
         if (this.themeArray !== undefined) {
             for (let i = 0; i < this.themeArray.length; i++) {
@@ -113,7 +116,7 @@ class Theme {
                 this.itemArray.push(item)
             }
         } else {
-            throw Error('There is not themeArray set for the game')
+            throw Error('There is no themeArray set for the game')
         }
     }
 }
