@@ -41,7 +41,7 @@ console.log(computer);
 var gameContinues = true;
 while (gameContinues === true) {
     // Writes out the options that the user can choose between
-    console.log('Your options:');
+    console.log('\nYour options:');
     console.log(itemOptions);
     // Takes the input guessed by the user
     var answerInNumbers = readlineSync.question("Pls guess the content in the computer row. choose ".concat(numberOfItems, " (id) numbers to represent your row. "));
@@ -73,12 +73,12 @@ while (gameContinues === true) {
             answer.push(itemOptions[7]);
         }
     }
-    console.log("Answer from player: ".concat(JSON.stringify(answer)));
     //Checks with the computer if the answer is correct.
     var result = computer.checkAnswer((answer));
     var parsedResult = JSON.parse(result);
     // Checks if the user has won and prints the resulttext and number of guesses needed if the user won. 
     // Prints the item + color. Green = correct place. Yellow = wrong place. Red = does not occur in the row.
+    console.log('\nResult from Computer:');
     if (parsedResult === 'Congratulations! You made it!') {
         console.log(parsedResult);
         console.log("Total number of guesses: ".concat(computer.getNumberOfGuesses()));

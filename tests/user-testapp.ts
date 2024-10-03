@@ -46,7 +46,7 @@ let gameContinues: boolean = true
 while (gameContinues === true) {
 
     // Writes out the options that the user can choose between
-    console.log('Your options:')
+    console.log('\nYour options:')
     console.log(itemOptions)
 
     // Takes the input guessed by the user
@@ -74,7 +74,6 @@ while (gameContinues === true) {
             answer.push(itemOptions[7])
         }
     }
-    console.log(`Answer from player: ${JSON.stringify(answer)}`)
 
     //Checks with the computer if the answer is correct.
     let result = computer.checkAnswer((answer))
@@ -82,6 +81,7 @@ while (gameContinues === true) {
 
     // Checks if the user has won and prints the resulttext and number of guesses needed if the user won. 
     // Prints the item + color. Green = correct place. Yellow = wrong place. Red = does not occur in the row.
+    console.log('\nResult from Computer:')
     if (parsedResult === 'Congratulations! You made it!') {
         console.log(parsedResult)
         console.log(`Total number of guesses: ${computer.getNumberOfGuesses()}`)
