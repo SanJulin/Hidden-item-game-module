@@ -19,12 +19,13 @@ var itemArray = theme.getItemArray();
 // Generates a random number
 var numberOfItems = Math.ceil(Math.random() * 8);
 // Creates a computer opponent
-var computer = new computer_1.default(numberOfItems, itemArray);
+var computer = new computer_1.default(numberOfItems, randomTheme);
+console.log('Computer Row:');
 console.log(computer);
 var gameContinues = true;
-while (gameContinues === true) {
+while (gameContinues) {
     for (var i = 0; i < itemArray.length; i++) {
-        console.log("Item options: ".concat(JSON.stringify(itemArray[i])));
+        console.log("Option: ".concat(i + 1, ". ").concat(itemArray[i].getName()));
     }
     // Creates an array with the items that the AI has choosen.
     var answer = [];
@@ -34,25 +35,32 @@ while (gameContinues === true) {
         answer.push(guess);
     }
     console.log("Answer from user: ".concat(JSON.stringify(answer)));
+    var resultArray = [];
     //Checks with the computer if the answer is correct.
-    var result = computer.checkAnswer(answer);
-    var parsedResult = JSON.parse(result);
+    resultArray = computer.checkAnswer(answer);
     // Checks how many guesses the AI has used. 
     var numberOfGuesses = computer.getNumberOfGuesses();
-    // Checks if the user has won and prints the resulttext and number of guesses needed if the user won. 
-    // Prints the item + color. Green = correct place. Yellow = wrong place. Red = does not occur in the row.
-    if (parsedResult === 'Congratulations! You made it!') {
-        console.log("".concat(parsedResult, " Total number of guesses: ").concat(numberOfGuesses));
-        gameContinues = false;
-    }
-    else {
-        for (var i = 0; i < parsedResult.length; i++) {
-            console.log(parsedResult[i]);
+    var correctGuesses = 0;
+    for (var i = 0; i < resultArray.length; i++) {
+        var color = resultArray[i].getColor();
+        if (color === 'green') {
+            correctGuesses++;
         }
-    }
-    // Ends the game if the AI has used 40 guesses.
-    if (numberOfGuesses === 40) {
-        console.log("You have unfortunately reached the maximum number of guesses. (".concat(numberOfGuesses, " guesses)"));
-        gameContinues = false;
+        // Checks if the user has won and prints the resulttext and number of guesses needed if the user won. 
+        // Prints the item + color. Green = correct place. Yellow = wrong place. Red = does not occur in the row.
+        if (correctGuesses === numberOfItems) {
+            console.log("Congratulations! You made it! Total number of guesses: ".concat(numberOfGuesses));
+            gameContinues = false;
+        }
+        else {
+            for (var i_1 = 0; i_1 < resultArray.length; i_1++) {
+                console.log("Result: ".concat(resultArray[i_1].getName(), ", color: ").concat(resultArray[i_1].getColor()));
+            }
+        }
+        // Ends the game if the AI has used 40 guesses.
+        if (numberOfGuesses === 40 || numberOfGuesses > 40) {
+            console.log("You have unfortunately reached the maximum number of guesses. (".concat(numberOfGuesses, " guesses)"));
+            gameContinues = false;
+        }
     }
 }

@@ -5,55 +5,25 @@ var computer_row_1 = require("./computer-row");
  * Class that represents the computer in the game.
  */
 var Computer = /** @class */ (function () {
-    function Computer(numberOfItems, themeArray) {
+    function Computer(numberOfItems, themeDescription) {
         this.computerRow = [];
         this.numberOfGuesses = 0;
-        this.setNumberOfItems(numberOfItems);
-        this.createComputerRow(themeArray);
+        this.createComputerRow(numberOfItems, themeDescription);
     }
-    /**
-     * Gets the number of items that is used in the game.
-     *
-     * @returns { number } - number of items used in the game.
-     */
-    Computer.prototype.getNumberOfItems = function () {
-        if (this.numberOfItems === null) {
-            throw Error('Number of items has not been set');
-        }
-        return this.numberOfItems;
-    };
-    /**
-    * Sets the number of items that should be included in the computer row.
-    *
-    * @param numberOfItems { number } - number of items that should be used in the game.
-    */
-    Computer.prototype.setNumberOfItems = function (numberOfItems) {
-        if (numberOfItems < 1 || numberOfItems > 8) {
-            throw new Error('Pls provide a valid number between 1-8');
-        }
-        else {
-            this.numberOfItems = numberOfItems;
-        }
-    };
     /**
      * Creates a new instance of the ComputerRow class and calls the generateRow method in the ComputerRow class in order to generate a new row that will represent the computer´s row of items.
      *
      * @param themeArray { object [] } - the array with items from the chosen theme.
      * @returns
      */
-    Computer.prototype.createComputerRow = function (themeArray) {
-        if (this.numberOfItems !== undefined) {
-            var computerRow = new computer_row_1.default(this.numberOfItems, themeArray);
-            this.computerRow = computerRow.generateRow();
-        }
-        else {
-            throw Error('Number of items has not been set yet');
-        }
+    Computer.prototype.createComputerRow = function (numberOfItems, themeDescription) {
+        var computerRow = new computer_row_1.default(numberOfItems, themeDescription);
+        this.computerRow = computerRow.generateRow();
     };
     /**
      * Returns an array with the items that represent the current computer row.
      *
-     * @returns { object [] } - an array with items
+     * @returns { string [] } - an array with items
      */
     Computer.prototype.getComputerRow = function () {
         if (this.computerRow === undefined) {
@@ -80,30 +50,26 @@ var Computer = /** @class */ (function () {
         if (answer.length !== this.computerRow.length) {
             throw new Error("The guess must contain ".concat(this.computerRow.length, " items."));
         }
-        var answerFromPlayer = answer;
-        var answerWithFeedback = [];
-        var numberOfCorrectItems = 0;
-        for (var i = 0; i < answerFromPlayer.length; i++) {
-            var itemObject = { item: String, color: String };
-            if (answerFromPlayer[i] === this.computerRow[i]) {
-                numberOfCorrectItems++;
-                itemObject = { item: answerFromPlayer[i], color: 'green' };
+        var answerFromPlayer = this.addColorsToItems(answer);
+        this.updateNumberOfGuesses();
+        return answerFromPlayer;
+    };
+    Computer.prototype.addColorsToItems = function (answer) {
+        for (var i = 0; i < answer.length; i++) {
+            if (answer[i].getName() === this.computerRow[i]) {
+                answer[i].setColor('green');
             }
-            else if (this.computerRow.includes(answerFromPlayer[i])) {
-                itemObject = { item: answerFromPlayer[i], color: 'yellow' };
+            else if (this.computerRow.includes(answer[i].getName())) {
+                answer[i].setColor('yellow');
             }
             else {
-                itemObject = { item: answerFromPlayer[i], color: 'red' };
+                answer[i].setColor('red');
             }
-            answerWithFeedback.push(itemObject);
         }
+        return answer;
+    };
+    Computer.prototype.updateNumberOfGuesses = function () {
         this.numberOfGuesses++;
-        if (numberOfCorrectItems >= this.numberOfItems) {
-            return JSON.stringify('Congratulations! You made it!');
-        }
-        else {
-            return JSON.stringify(answerWithFeedback);
-        }
     };
     return Computer;
 }());

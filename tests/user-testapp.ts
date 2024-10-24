@@ -77,6 +77,8 @@ while (gameContinues === true) {
 
     //Checks with the computer if the answer is correct.
     let result = computer.checkAnswer((answer))
+    console.log(computer.checkAnswer(answer))
+
     let parsedResult = JSON.parse(result)
 
     // Checks if the user has won and prints the resulttext and number of guesses needed if the user won. 

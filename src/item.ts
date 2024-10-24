@@ -2,13 +2,17 @@
  * Class that represents one item in the game. 
  */
 class Item {
-    private id : number
-    private name : string 
+    private id: number = 0
+    private name: string = ''
     private color: string = ''
+    private image: HTMLImageElement | undefined
 
-    constructor(id: number, name : string) {
-        this.setId(id)
-        this.setName(name)
+    constructor(id: number, name: string, url?: string) {
+        this.id = id
+        this.name = name
+        if (url) {
+            this.setImage(url)
+        }
     }
 
     /**
@@ -21,38 +25,12 @@ class Item {
     }
 
     /**
-     * Sets the name for the current item that will be used in the game.  
-     * 
-     * @param theme { string } - the name of the item.
-     */
-    private setName(name: string) : void {
-        if (name === '') {
-            throw new Error('The item must have a name') 
-        } else {
-            this.name = name
-        }
-    }
-
-    /**
      * Gets the id of the current item used in the game. 
      * 
      * @returns { number } - the id of the current item.
      */
-    public getId(): number  {
+    public getId(): number {
         return this.id
-    }
-
-    /**
-     * Sets the id for the current item that will be used in the game.  
-     * 
-     * @param id { number } - the id of the item.
-     */
-    private setId(id : number) : void {
-        if (id === null) {
-            throw new Error('The item must have an id') 
-        } else {
-            this.id = id
-        }
     }
 
     /**
@@ -61,9 +39,6 @@ class Item {
      * @returns { string } - the color of the current item.
      */
     public getColor(): string {
-        if (this.color === undefined) {
-            throw Error('No color has been set for the item')
-        }
         return this.color
     }
 
@@ -72,12 +47,33 @@ class Item {
      * 
      * @param theme { string } - the name of the item.
      */
-    public setColor(color: string) : void {
-        if (color === 'green' || color === 'yellow' || color === 'red' ) {
+    public setColor(color: string): void {
+        if (color === 'green' || color === 'yellow' || color === 'red') {
             this.color = color
         } else {
-            throw new Error('Only green, yellow and red are valid colors') 
+            throw new Error('Only green, yellow and red are valid colors')
         }
+    }
+
+    /**
+     * Gets the item image if it exists.
+     */
+    public getImage(): HTMLImageElement | undefined {
+        if (this.image) {
+            return this.image
+        }
+    }
+
+    /**
+     * Sets the item image if an url was provided. Looks like this if it comes from the Theme class: `../img/${this.theme}/${(this.themeArray[i])}.jpg`.
+     * 
+     * @param url - the url to the image in the img folder
+     */
+    public setImage(url: string) {
+        const image = document.createElement('img')
+        image.setAttribute('src', url)
+        image.setAttribute('alt', this.name)
+        this.image = image
     }
 }
 

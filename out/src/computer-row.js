@@ -1,13 +1,19 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const theme_1 = __importDefault(require("./theme"));
 /**
  * Class that represents the computer row with items that the Computer is creating.
  */
 class ComputerRow {
-    constructor(numberOfItems, itemArray) {
+    constructor(numberOfItems, themeDecription) {
+        this.numberOfItems = 0;
         this.computerRow = [];
+        this.themeArray = [];
         this.setNumberOfItems(numberOfItems);
-        this.setItemArray(itemArray);
+        this.setThemeArray(themeDecription);
     }
     /**
      * Gets the number of items that is included in the computer row.
@@ -27,7 +33,7 @@ class ComputerRow {
      */
     setNumberOfItems(numberOfItems) {
         if (numberOfItems < 1 || numberOfItems > 8) {
-            throw new Error('Pls provide a number between 1 - 8');
+            throw new Error('Pls provide a number between 2 - 8');
         }
         else {
             this.numberOfItems = numberOfItems;
@@ -36,25 +42,23 @@ class ComputerRow {
     /**
      * Sets the itemArray if there are 8 items in the provided array.
      *
-     * @param itemArray object [] - the array with themed items chosen for the game.
+     * @param themeArray object [] - the array with themed items chosen for the game.
      */
-    setItemArray(itemArray) {
-        if (itemArray.length !== 8) {
-            throw new Error('The item array must contain 8 items');
-        }
-        this.itemArray = itemArray;
+    setThemeArray(themeDecription) {
+        const theme = new theme_1.default(themeDecription);
+        this.themeArray = theme.getThemeArray();
     }
     /**
      * Creates a random row based on the itemArray and returns it to the computer.
      *
-     * @returns {object [] } - A row with items.
+     * @returns {string [] } - A row with items.
      */
     generateRow() {
         const rowLength = this.numberOfItems;
         for (let i = 0; i < rowLength; i++) {
-            const nextItemIndex = Math.floor(Math.random() * this.itemArray.length);
-            const nextItem = this.itemArray[nextItemIndex];
-            this.computerRow.push(nextItem);
+            const nextItemIndex = Math.floor(Math.random() * this.themeArray.length);
+            const themeItem = this.themeArray[nextItemIndex];
+            this.computerRow.push(themeItem);
         }
         return this.computerRow;
     }

@@ -1,16 +1,20 @@
-import Item from "./item"
+import Item from './item'
 
 /**
  * Class that represents the theme of the game. 
  */
 class Theme {
     private theme: string = ''
-    private themeArray: string[]
-    private itemArray: object[] = []
+    private themeArray: string[] = []
+    private itemArray: Item[] = []
     private availableThemes: string[] = ['flags', 'animals', 'colors', 'professions', 'movies']
 
     constructor(theme?: string) {
-        this.setTheme(theme)
+        if (theme) {
+            this.setTheme(theme)
+        } else {
+            this.theme = ''
+        }
     }
 
     /**
@@ -19,7 +23,7 @@ class Theme {
     * @returns { string } - the theme of the items used in the game.
     */
     public getTheme(): string {
-        if (this.theme === undefined) {
+        if (this.theme) {
             throw new Error('No theme has been set for the game')
         }
         return this.theme
@@ -32,10 +36,8 @@ class Theme {
      */
     public setTheme(theme: string): void {
         this.theme = theme
-        if (this.theme !== undefined) {
+        if (this.theme) {
             this.setThemeArray()
-        } else {
-            this.theme === ''
         }
     }
 
@@ -51,13 +53,28 @@ class Theme {
     /**
      * Gets the current array with items.
      * 
-     * @returns { object [] } - an array with items.
+     * @returns { Item [] } - an array with items.
      */
-    public getItemArray(): object[] {
+    public getItemArray(): Item[] {
         try {
             return this.itemArray
         } catch (error) {
             console.log(error)
+            return []
+        }
+    }
+
+    /**
+ * Gets the current array with items.
+ * 
+ * @returns { string [] } - an array with items.
+ */
+    public getThemeArray(): string[] {
+        try {
+            return this.themeArray
+        } catch (error) {
+            console.log(error)
+            return []
         }
     }
 
@@ -67,7 +84,7 @@ class Theme {
      * @param theme { string } - the name of the theme
      * @param themeArray { object [] } - the array with 8 items that should be included in the itemArray.
      */
-    public setOtherTheme(theme: string, themeArray: object[]): void {
+    public setOtherTheme(theme: string, themeArray: string[]): void {
         if (themeArray.length !== 8) {
             throw Error('The themeArray must contain 8 items.')
         }
@@ -75,7 +92,8 @@ class Theme {
             throw Error('Pls provide a theme "name" for the game')
         } else {
             this.theme = theme
-            this.itemArray = themeArray
+            this.themeArray = themeArray
+            this.createItemArray()
         }
     }
 
@@ -83,21 +101,21 @@ class Theme {
      * Checks if this.theme is undefined and throws an error if it is. Sets the array with items that should be used in the game by checking what the current theme is.  
      */
     private setThemeArray(): void {
-        if (this.theme !== undefined) {
+        if (this.theme) {
             if (this.theme === 'flags') {
-                this.themeArray = ['sweden', 'japan', 'italy', 'norway', 'kenya', 'china', 'brazil', 'uk']
+                this.themeArray = ['Sweden', 'Japan', 'Italy', 'New Zealand', 'Kenya', 'China', 'Brazil', 'United Kingdom']
             }
             if (this.theme === 'animals') {
-                this.themeArray = ['tiger', 'elefant', 'gorilla', 'whale', 'giraff', 'zebra', 'bear', 'crocodile']
+                this.themeArray = ['Bear', 'Crocodile', 'Elefant', 'Giraff', 'Gorilla', 'Tiger', 'Whale', 'Zebra']
             }
             if (this.theme === 'colors') {
-                this.themeArray = ['red', 'blue', 'green', 'yellow', 'pink', 'black', 'white', 'purple']
+                this.themeArray = ['Black', 'Blue', 'Green', 'Pink', 'Purple', 'Red', 'Turquoise', 'Yellow']
             }
             if (this.theme === 'professions') {
-                this.themeArray = ['police', 'doctor', 'pilot', 'developer', 'teacher', 'administrator', 'actor', 'chef']
+                this.themeArray = ['Actor', 'Chef', 'Developer', 'Doctor', 'Fireman', 'Pilot', 'Police', 'Teacher']
             }
             if (this.theme === 'movies') {
-                this.themeArray = ['titanic', 'leon', 'matrix', 'pulp fiction', 'casablanca', 'lord of the rings', 'alive', 'the shawshank redemption']
+                this.themeArray = ['Alive', 'Casablanca', 'Leon', 'Lord of the rings', 'Matrix', 'Pulp fiction', 'The shawshank redemption', 'Titanic']
             }
         } else {
             throw new Error('There is no theme set for the game')
@@ -106,11 +124,12 @@ class Theme {
     }
 
     /**
-     * Creates an array with items based on the provided theme array. 
+     * Creates an array with items based on the provided theme array. Uncomment the url row and insert url when creating an item if the image should be included in the item. (const item = new Item(i + 1, this.themeArray[i], url))
      */
-    private createItemArray() {
-        if (this.themeArray !== undefined) {
+    private createItemArray(): void {
+        if (this.themeArray) {
             for (let i = 0; i < this.themeArray.length; i++) {
+                //const url = `/img/${this.theme}/${(this.themeArray[i])}.jpg`
                 const item = new Item(i + 1, this.themeArray[i])
                 this.itemArray.push(item)
             }

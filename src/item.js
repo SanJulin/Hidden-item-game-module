@@ -4,10 +4,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Class that represents one item in the game.
  */
 var Item = /** @class */ (function () {
-    function Item(id, name) {
+    function Item(id, name, url) {
+        this.id = 0;
+        this.name = '';
         this.color = '';
-        this.setId(id);
-        this.setName(name);
+        this.id = id;
+        this.name = name;
+        if (url) {
+            this.setImage(url);
+        }
     }
     /**
      * Gets the name of the current item used in the game.
@@ -18,19 +23,6 @@ var Item = /** @class */ (function () {
         return this.name;
     };
     /**
-     * Sets the name for the current item that will be used in the game.
-     *
-     * @param theme { string } - the name of the item.
-     */
-    Item.prototype.setName = function (name) {
-        if (name === '') {
-            throw new Error('The item must have a name');
-        }
-        else {
-            this.name = name;
-        }
-    };
-    /**
      * Gets the id of the current item used in the game.
      *
      * @returns { number } - the id of the current item.
@@ -39,27 +31,11 @@ var Item = /** @class */ (function () {
         return this.id;
     };
     /**
-     * Sets the id for the current item that will be used in the game.
-     *
-     * @param id { number } - the id of the item.
-     */
-    Item.prototype.setId = function (id) {
-        if (id === null) {
-            throw new Error('The item must have an id');
-        }
-        else {
-            this.id = id;
-        }
-    };
-    /**
      * Gets the color of the current item used in the game.
      *
      * @returns { string } - the color of the current item.
      */
     Item.prototype.getColor = function () {
-        if (this.color === undefined) {
-            throw Error('No color has been set for the item');
-        }
         return this.color;
     };
     /**
@@ -74,6 +50,25 @@ var Item = /** @class */ (function () {
         else {
             throw new Error('Only green, yellow and red are valid colors');
         }
+    };
+    /**
+     * Gets the item image if it exists.
+     */
+    Item.prototype.getImage = function () {
+        if (this.image) {
+            return this.image;
+        }
+    };
+    /**
+     * Sets the item image if an url was provided. Looks like this if it comes from the Theme class: `../img/${this.theme}/${(this.themeArray[i])}.jpg`.
+     *
+     * @param url - the url to the image in the img folder
+     */
+    Item.prototype.setImage = function (url) {
+        var image = document.createElement('img');
+        image.setAttribute('src', url);
+        image.setAttribute('alt', this.name);
+        this.image = image;
     };
     return Item;
 }());

@@ -1,41 +1,15 @@
-import  ComputerRow from './computer-row';
+import ComputerRow from './computer-row';
+import Item from './item'
 
 /**
  * Class that represents the computer in the game.
  */
 class Computer {
-    private computerRow: object[] = []
-    private numberOfItems: number
+    private computerRow: string[] = []
     private numberOfGuesses: number = 0
 
-    constructor(numberOfItems: number, themeArray: object[]) {
-        this.setNumberOfItems(numberOfItems)
-        this.createComputerRow(themeArray)
-    }
-
-    /**
-     * Gets the number of items that is used in the game. 
-     * 
-     * @returns { number } - number of items used in the game.
-     */
-    public getNumberOfItems() : number {
-        if (this.numberOfItems === null) {
-            throw Error('Number of items has not been set')
-        }
-        return this.numberOfItems
-    }
-
-     /**
-     * Sets the number of items that should be included in the computer row. 
-     * 
-     * @param numberOfItems { number } - number of items that should be used in the game.
-     */
-    public setNumberOfItems(numberOfItems: number) : void {
-        if (numberOfItems < 1 || numberOfItems > 8) {
-            throw new Error('Pls provide a valid number between 1-8')
-        } else {
-            this.numberOfItems = numberOfItems
-        }
+    constructor(numberOfItems: number, themeDescription: string) {
+        this.createComputerRow(numberOfItems, themeDescription)
     }
 
     /**
@@ -44,21 +18,17 @@ class Computer {
      * @param themeArray { object [] } - the array with items from the chosen theme. 
      * @returns 
      */
-    private createComputerRow(themeArray: object[]) : void{
-        if (this.numberOfItems !== undefined) {
-            const computerRow = new ComputerRow(this.numberOfItems, themeArray)
+    private createComputerRow(numberOfItems: number, themeDescription: string): void {
+            const computerRow = new ComputerRow(numberOfItems, themeDescription)
             this.computerRow = computerRow.generateRow()
-        } else {
-            throw Error('Number of items has not been set yet')
-        }
     }
 
     /**
      * Returns an array with the items that represent the current computer row.
      * 
-     * @returns { object [] } - an array with items
+     * @returns { string [] } - an array with items
      */
-    public getComputerRow(): object[] {
+    public getComputerRow(): string[] {
         if (this.computerRow === undefined) {
             throw new Error('The computer row has not been created yet')
         }
@@ -81,32 +51,31 @@ class Computer {
      * @returns { string } - A text if the user´s guess was correct.
      * @returns { object [] } - An array with objects if the user´s guess wasn´t correct. 
      */
-    public checkAnswer(answer: object[]): any {
-        if (answer.length !== this.computerRow.length ) {
+    public checkAnswer(answer: Item[]): Item[] {
+        if (answer.length !== this.computerRow.length) {
             throw new Error(`The guess must contain ${this.computerRow.length} items.`)
-        } 
-        const answerFromPlayer = answer
-        let answerWithFeedback = []
-        let numberOfCorrectItems: number = 0
+        }
+        const answerFromPlayer = this.addColorsToItems(answer)
 
-        for (let i = 0; i < answerFromPlayer.length; i++) {
-            let itemObject: object = { item: String, color: String }
-            if (answerFromPlayer[i] === this.computerRow[i]) {
-                numberOfCorrectItems++
-                itemObject = { item: answerFromPlayer[i], color: 'green' }
-            } else if (this.computerRow.includes(answerFromPlayer[i])) {
-                itemObject = { item: answerFromPlayer[i], color: 'yellow' }
+        this.updateNumberOfGuesses()
+        return answerFromPlayer
+    }
+
+    addColorsToItems(answer: Item[]): Item[] {
+        for (let i = 0; i < answer.length; i++) {
+            if (answer[i].getName() === this.computerRow[i]) {
+                answer[i].setColor('green')
+            } else if (this.computerRow.includes(answer[i].getName())) {
+                answer[i].setColor('yellow')
             } else {
-                itemObject = { item: answerFromPlayer[i], color: 'red' }
+                answer[i].setColor('red')
             }
-            answerWithFeedback.push(itemObject)
         }
-        this.numberOfGuesses ++
-        if (numberOfCorrectItems >= this.numberOfItems) {
-            return JSON.stringify('Congratulations! You made it!')
-        } else {
-            return JSON.stringify(answerWithFeedback)
-        }
+        return answer
+    }
+
+    updateNumberOfGuesses() {
+        this.numberOfGuesses++
     }
 }
 

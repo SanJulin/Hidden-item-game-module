@@ -8,35 +8,10 @@ const computer_row_1 = __importDefault(require("./computer-row"));
  * Class that represents the computer in the game.
  */
 class Computer {
-    constructor(numberOfItems, themeArray) {
+    constructor(numberOfItems, themeDescription) {
         this.computerRow = [];
         this.numberOfGuesses = 0;
-        this.setNumberOfItems(numberOfItems);
-        this.createComputerRow(themeArray);
-    }
-    /**
-     * Gets the number of items that is used in the game.
-     *
-     * @returns { number } - number of items used in the game.
-     */
-    getNumberOfItems() {
-        if (this.numberOfItems === null) {
-            throw Error('Number of items has not been set');
-        }
-        return this.numberOfItems;
-    }
-    /**
-    * Sets the number of items that should be included in the computer row.
-    *
-    * @param numberOfItems { number } - number of items that should be used in the game.
-    */
-    setNumberOfItems(numberOfItems) {
-        if (numberOfItems < 1 || numberOfItems > 8) {
-            throw new Error('Pls provide a valid number between 1-8');
-        }
-        else {
-            this.numberOfItems = numberOfItems;
-        }
+        this.createComputerRow(numberOfItems, themeDescription);
     }
     /**
      * Creates a new instance of the ComputerRow class and calls the generateRow method in the ComputerRow class in order to generate a new row that will represent the computer´s row of items.
@@ -44,19 +19,14 @@ class Computer {
      * @param themeArray { object [] } - the array with items from the chosen theme.
      * @returns
      */
-    createComputerRow(themeArray) {
-        if (this.numberOfItems !== undefined) {
-            const computerRow = new computer_row_1.default(this.numberOfItems, themeArray);
-            this.computerRow = computerRow.generateRow();
-        }
-        else {
-            throw Error('Number of items has not been set yet');
-        }
+    createComputerRow(numberOfItems, themeDescription) {
+        const computerRow = new computer_row_1.default(numberOfItems, themeDescription);
+        this.computerRow = computerRow.generateRow();
     }
     /**
      * Returns an array with the items that represent the current computer row.
      *
-     * @returns { object [] } - an array with items
+     * @returns { string [] } - an array with items
      */
     getComputerRow() {
         if (this.computerRow === undefined) {
@@ -83,30 +53,26 @@ class Computer {
         if (answer.length !== this.computerRow.length) {
             throw new Error(`The guess must contain ${this.computerRow.length} items.`);
         }
-        const answerFromPlayer = answer;
-        let answerWithFeedback = [];
-        let numberOfCorrectItems = 0;
-        for (let i = 0; i < answerFromPlayer.length; i++) {
-            let itemObject = { item: String, color: String };
-            if (answerFromPlayer[i] === this.computerRow[i]) {
-                numberOfCorrectItems++;
-                itemObject = { item: answerFromPlayer[i], color: 'green' };
+        const answerFromPlayer = this.addColorsToItems(answer);
+        this.updateNumberOfGuesses();
+        return answerFromPlayer;
+    }
+    addColorsToItems(answer) {
+        for (let i = 0; i < answer.length; i++) {
+            if (answer[i].getName() === this.computerRow[i]) {
+                answer[i].setColor('green');
             }
-            else if (this.computerRow.includes(answerFromPlayer[i])) {
-                itemObject = { item: answerFromPlayer[i], color: 'yellow' };
+            else if (this.computerRow.includes(answer[i].getName())) {
+                answer[i].setColor('yellow');
             }
             else {
-                itemObject = { item: answerFromPlayer[i], color: 'red' };
+                answer[i].setColor('red');
             }
-            answerWithFeedback.push(itemObject);
         }
+        return answer;
+    }
+    updateNumberOfGuesses() {
         this.numberOfGuesses++;
-        if (numberOfCorrectItems >= this.numberOfItems) {
-            return JSON.stringify('Congratulations! You made it!');
-        }
-        else {
-            return JSON.stringify(answerWithFeedback);
-        }
     }
 }
 exports.default = Computer;

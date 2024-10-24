@@ -1,13 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var theme_1 = require("./theme");
 /**
  * Class that represents the computer row with items that the Computer is creating.
  */
 var ComputerRow = /** @class */ (function () {
-    function ComputerRow(numberOfItems, itemArray) {
+    function ComputerRow(numberOfItems, themeDecription) {
+        this.numberOfItems = 0;
         this.computerRow = [];
+        this.themeArray = [];
         this.setNumberOfItems(numberOfItems);
-        this.setItemArray(itemArray);
+        this.setThemeArray(themeDecription);
     }
     /**
      * Gets the number of items that is included in the computer row.
@@ -27,7 +30,7 @@ var ComputerRow = /** @class */ (function () {
      */
     ComputerRow.prototype.setNumberOfItems = function (numberOfItems) {
         if (numberOfItems < 1 || numberOfItems > 8) {
-            throw new Error('Pls provide a number between 1 - 8');
+            throw new Error('Pls provide a number between 2 - 8');
         }
         else {
             this.numberOfItems = numberOfItems;
@@ -36,25 +39,23 @@ var ComputerRow = /** @class */ (function () {
     /**
      * Sets the itemArray if there are 8 items in the provided array.
      *
-     * @param itemArray object [] - the array with themed items chosen for the game.
+     * @param themeArray object [] - the array with themed items chosen for the game.
      */
-    ComputerRow.prototype.setItemArray = function (itemArray) {
-        if (itemArray.length !== 8) {
-            throw new Error('The item array must contain 8 items');
-        }
-        this.itemArray = itemArray;
+    ComputerRow.prototype.setThemeArray = function (themeDecription) {
+        var theme = new theme_1.default(themeDecription);
+        this.themeArray = theme.getThemeArray();
     };
     /**
      * Creates a random row based on the itemArray and returns it to the computer.
      *
-     * @returns {object [] } - A row with items.
+     * @returns {string [] } - A row with items.
      */
     ComputerRow.prototype.generateRow = function () {
         var rowLength = this.numberOfItems;
         for (var i = 0; i < rowLength; i++) {
-            var nextItemIndex = Math.floor(Math.random() * this.itemArray.length);
-            var nextItem = this.itemArray[nextItemIndex];
-            this.computerRow.push(nextItem);
+            var nextItemIndex = Math.floor(Math.random() * this.themeArray.length);
+            var themeItem = this.themeArray[nextItemIndex];
+            this.computerRow.push(themeItem);
         }
         return this.computerRow;
     };
