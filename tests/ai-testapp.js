@@ -37,7 +37,7 @@ while (gameContinues) {
     console.log("Answer from player: ".concat(JSON.stringify(answer)));
     var resultArray = [];
     //Checks with the computer if the answer is correct.
-    resultArray = computer.checkAnswer(answer);
+    resultArray = computer.getFeedBackFromComputer(answer);
     // Checks how many guesses the AI has used. 
     var numberOfGuesses = computer.getNumberOfGuesses();
     var correctGuesses = 0;

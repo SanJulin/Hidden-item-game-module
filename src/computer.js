@@ -13,8 +13,8 @@ var Computer = /** @class */ (function () {
     /**
      * Creates a new instance of the ComputerRow class and calls the generateRow method in the ComputerRow class in order to generate a new row that will represent the computer´s row of items.
      *
-     * @param themeArray { object [] } - the array with items from the chosen theme.
-     * @returns
+     * @param numberOfItems - the number of items that should be used in the computer row.
+     * @param themeDescription - the chosen theme
      */
     Computer.prototype.createComputerRow = function (numberOfItems, themeDescription) {
         var computerRow = new computer_row_1.default(numberOfItems, themeDescription);
@@ -29,34 +29,41 @@ var Computer = /** @class */ (function () {
         return this.numberOfGuesses;
     };
     /**
-     * Method that checks if the row of items provided by the user matches the computer´s row by checking if the item and the position of the item is the same. An object is created for each item. If the item is in the correct place - the item will get the color green. If the item is present in the row, but in the wrong place - the item will get the color yellow and the color red will be used for items that are not present in the computer´s row.
+     * Public method that calls other private methods in the same class to give the player feedback on the result and update the number of guesses used.
      *
-     * @param answer { object [] } - array with items from the user
-     * @returns { string } - A text if the user´s guess was correct.
-     * @returns { object [] } - An array with objects if the user´s guess wasn´t correct.
+     * @param answerFromPlayer { Item [] } - array with items from the user
+     * @returns { Item [] } - An array with objects if the user´s guess wasn´t correct.
      */
-    Computer.prototype.checkAnswer = function (answer) {
-        if (answer.length !== this.computerRow.length) {
+    Computer.prototype.getFeedBackFromComputer = function (answerFromPlayer) {
+        if (answerFromPlayer.length !== this.computerRow.length) {
             throw new Error("The guess must contain ".concat(this.computerRow.length, " items."));
         }
-        var answerFromPlayer = this.addColorsToItems(answer);
+        var feedbackFromComputer = this.addColorsToItems(answerFromPlayer);
         this.updateNumberOfGuesses();
-        return answerFromPlayer;
+        return feedbackFromComputer;
     };
-    Computer.prototype.addColorsToItems = function (answer) {
-        for (var i = 0; i < answer.length; i++) {
-            if (answer[i].getName() === this.computerRow[i]) {
-                answer[i].setColor('green');
+    /**
+     * Checks with the computer if the answer is correct. If the item is in the correct place - the item will get the color green. If the item is present in the row, but in the wrong place - the item will get the color yellow and the color red will be used for items that are not present in the computer´s row.
+     * @param answerFromPlayer - the array with items in the players answer.
+     * @returns answerFromPlayer - the same array, but with feedback in form of colors.
+     */
+    Computer.prototype.addColorsToItems = function (answerFromPlayer) {
+        for (var i = 0; i < answerFromPlayer.length; i++) {
+            if (answerFromPlayer[i].getName() === this.computerRow[i]) {
+                answerFromPlayer[i].setColor('green');
             }
-            else if (this.computerRow.includes(answer[i].getName())) {
-                answer[i].setColor('yellow');
+            else if (this.computerRow.includes(answerFromPlayer[i].getName())) {
+                answerFromPlayer[i].setColor('yellow');
             }
             else {
-                answer[i].setColor('red');
+                answerFromPlayer[i].setColor('red');
             }
         }
-        return answer;
+        return answerFromPlayer;
     };
+    /**
+     * Updates the number of guesses the player has used with 1 for each round.
+     */
     Computer.prototype.updateNumberOfGuesses = function () {
         this.numberOfGuesses++;
     };

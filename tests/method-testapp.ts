@@ -23,8 +23,8 @@ console.log(computer)
 
 // Send the players guess to the computer. The computer compares the row of items to the computerRow and sends back a result/feedback
 const answerArray = [ new Item(1,'Actor'),new Item(2,'Chef'),new Item(3,'Developer'),new Item(4,'Doctor')]
-const result = computer.checkAnswer(answerArray)
-console.log(`\ncomputer.checkAnswer(answerArray)  -    \nresult: ${JSON.stringify(result)}`)
+const result = computer.getFeedBackFromComputer(answerArray)
+console.log(`\ncomputer.getFeedBackFromComputer(answerArray)  -    \nresult: ${JSON.stringify(result)}`)
 
 // Gets the number of guesses used so far in the game
 const guesses = computer.getNumberOfGuesses()
@@ -68,9 +68,6 @@ console.log(`\ntheme.getAvailableThemes() -    result: ${theme.getAvailableTheme
 // Sets the theme to animals
 theme.setTheme('animals')
 console.log('\ntheme.setTheme(animals)')
-
-// Gets the chosen theme
-console.log(`\ntheme.getTheme() -      result: ${theme.getTheme()}`)
 
 // Gets an array with names within the choosen theme
 console.log(`\ntheme.getThemeArray() -      result: ${theme.getThemeArray()}`)

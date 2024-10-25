@@ -23,7 +23,7 @@ var Theme = /** @class */ (function () {
     * @returns { string } - the theme of the items used in the game.
     */
     Theme.prototype.getTheme = function () {
-        if (!this.theme) {
+        if (this.theme) {
             throw new Error('No theme has been set for the game');
         }
         return this.theme;
@@ -48,16 +48,50 @@ var Theme = /** @class */ (function () {
         return this.availableThemes;
     };
     /**
+     * Gets the current array with items.
+     *
+     * @returns { Item [] } - an array with items.
+     */
+    Theme.prototype.getItemArray = function () {
+        try {
+            return this.itemArray;
+        }
+        catch (error) {
+            console.log(error);
+            return [];
+        }
+    };
+    /**
     * Gets the current array with items.
     *
     * @returns { string [] } - an array with items.
     */
     Theme.prototype.getThemeArray = function () {
-        if (this.themeArray) {
+        try {
             return this.themeArray;
         }
+        catch (error) {
+            console.log(error);
+            return [];
+        }
+    };
+    /**
+     * Sets the theme and itemArray for other themes than the available themes included in the module. The user of the module must provide a theme name and an array that includes 8 items in order to create a themes of their choice.
+     *
+     * @param theme { string } - the name of the theme
+     * @param themeArray { string [] } - the array with 8 items that should be included in the itemArray.
+     */
+    Theme.prototype.setOtherTheme = function (theme, themeArray) {
+        if (themeArray.length !== 8) {
+            throw Error('The themeArray must contain 8 items.');
+        }
+        if (theme === '') {
+            throw Error('Pls provide a theme "name" for the game');
+        }
         else {
-            throw new Error('No theme has been set for the game');
+            this.theme = theme;
+            this.themeArray = themeArray;
+            this.createItemArray();
         }
     };
     /**
@@ -87,25 +121,12 @@ var Theme = /** @class */ (function () {
         this.createItemArray();
     };
     /**
-    * Gets the current array with items.
-    *
-    * @returns { Item [] } - an array with items.
-    */
-    Theme.prototype.getItemArray = function () {
-        if (this.itemArray) {
-            return this.itemArray;
-        }
-        else {
-            throw new Error('No item array has been set for the game');
-        }
-    };
-    /**
-     * Creates an array with items based on the provided theme array. Uncomment the url row and insert url when creating an item if the image should be included in the item. (const item = new Item(i + 1, this.themeArray[i], url))
+     * Creates an array with items based on the provided theme array.
      */
     Theme.prototype.createItemArray = function () {
         if (this.themeArray) {
             for (var i = 0; i < this.themeArray.length; i++) {
-                //const url = `/img/${this.theme}/${(this.themeArray[i])}.jpg`
+                var url = "../img/".concat(this.theme, "/").concat((this.themeArray[i]), ".jpg");
                 var item = new item_1.default(i + 1, this.themeArray[i] /*, url*/);
                 this.itemArray.push(item);
             }

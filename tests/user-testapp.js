@@ -50,11 +50,14 @@ while (gameContinues === true) {
     // Creates an array with the items that the user has choosen.
     var answer = [];
     for (var i = 0; i < answerInNumbers.length; i++) {
-        var answeredItem = itemOptions[(answerInNumbers[i] - 1)];
+        var ans = answerInNumbers[i];
+        console.log(ans);
+        var answeredItem = itemOptions[(ans - 1)];
+        console.log(answeredItem);
         answer.push(answeredItem);
     }
     //Checks with the computer if the answer is correct.
-    var resultArray = computer.checkAnswer((answer));
+    var resultArray = computer.getFeedBackFromComputer((answer));
     // Checks how many guesses the AI has used. 
     var numberOfGuesses = computer.getNumberOfGuesses();
     var correctGuesses = 0;

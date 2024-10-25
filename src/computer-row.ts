@@ -11,7 +11,7 @@ class ComputerRow {
     constructor(numberOfItems: number, themeDecription: string) {
         this.setNumberOfItems(numberOfItems)
         this.setThemeArray(themeDecription)
-        this.generateRow()
+        this.generateComputerRow()
     }
 
     /**
@@ -20,7 +20,7 @@ class ComputerRow {
      * @returns { number } - number of items included in the computer row.
      */
     public getNumberOfItems(): number {
-        if (this.numberOfItems === null) {
+        if (!this.numberOfItems) {
             throw new Error('Number of items has not been set for the game')
         }
         return this.numberOfItems
@@ -39,10 +39,11 @@ class ComputerRow {
         }
     }
 
+
     /**
      * Sets the itemArray if there are 8 items in the provided array.
      * 
-     * @param themeArray object [] - the array with themed items chosen for the game. 
+     * @param themeDecription - the chosen theme
      */
     private setThemeArray(themeDecription: string): void {
         const theme = new Theme(themeDecription)
@@ -54,7 +55,7 @@ class ComputerRow {
     * 
     * @returns { string [] } - the computer row.
     */
-    public getComputerRow(): string [] {
+    public getComputerRow(): string[] {
         if (this.computerRow === undefined) {
             throw new Error('No computer row has been set for the game')
         }
@@ -62,16 +63,22 @@ class ComputerRow {
     }
 
     /**
-     * Creates a random row based on the itemArray and returns it to the computer. 
-     * 
-     * @returns {string [] } - A row with items. 
+     * Creates a random row with names from the chosen theme that has been set in themeArray. 
+     * The computer will use the secret row in the game.
+     * The number of items will decide how many names that should be included. 
      */
-    private generateRow(): void {
-        const rowLength = this.numberOfItems
-        for (let i = 0; i < rowLength; i++) {
-            const nextItemIndex = Math.floor(Math.random() * this.themeArray.length)
-            const themeItem = this.themeArray[nextItemIndex]
-            this.computerRow.push(themeItem)
+    private generateComputerRow(): void {
+        try {
+            const rowLength = this.numberOfItems
+            for (let i = 0; i < rowLength; i++) {
+                const nextItemIndex = Math.floor(Math.random() * this.themeArray.length)
+                const themeItem = this.themeArray[nextItemIndex]
+                this.computerRow.push(themeItem)
+            }
+        } catch (error) {
+            if (error instanceof Error) {
+                console.log(error)
+            }
         }
     }
 }

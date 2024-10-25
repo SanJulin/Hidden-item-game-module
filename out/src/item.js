@@ -4,15 +4,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Class that represents one item in the game.
  */
 class Item {
-    constructor(id, name, url) {
+    //private image: HTMLImageElement | undefined
+    constructor(id, name /*, url?: string*/) {
         this.id = 0;
         this.name = '';
         this.color = '';
         this.id = id;
         this.name = name;
-        if (url) {
-            this.setImage(url);
-        }
+        //if (url) {
+        //    this.setImage(url)
+        //}
     }
     /**
      * Gets the name of the current item used in the game.
@@ -50,25 +51,6 @@ class Item {
         else {
             throw new Error('Only green, yellow and red are valid colors');
         }
-    }
-    /**
-     * Gets the item image if it exists.
-     */
-    getImage() {
-        if (this.image) {
-            return this.image;
-        }
-    }
-    /**
-     * Sets the item image if an url was provided. Looks like this if it comes from the Theme class: `../img/${this.theme}/${(this.themeArray[i])}.jpg`.
-     *
-     * @param url - the url to the image in the img folder
-     */
-    setImage(url) {
-        const image = document.createElement('img');
-        image.setAttribute('src', url);
-        image.setAttribute('alt', this.name);
-        this.image = image;
     }
 }
 exports.default = Item;

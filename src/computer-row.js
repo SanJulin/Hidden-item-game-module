@@ -11,7 +11,7 @@ var ComputerRow = /** @class */ (function () {
         this.themeArray = [];
         this.setNumberOfItems(numberOfItems);
         this.setThemeArray(themeDecription);
-        this.generateRow();
+        this.generateComputerRow();
     }
     /**
      * Gets the number of items that is included in the computer row.
@@ -19,7 +19,7 @@ var ComputerRow = /** @class */ (function () {
      * @returns { number } - number of items included in the computer row.
      */
     ComputerRow.prototype.getNumberOfItems = function () {
-        if (this.numberOfItems === null) {
+        if (!this.numberOfItems) {
             throw new Error('Number of items has not been set for the game');
         }
         return this.numberOfItems;
@@ -40,7 +40,7 @@ var ComputerRow = /** @class */ (function () {
     /**
      * Sets the itemArray if there are 8 items in the provided array.
      *
-     * @param themeArray object [] - the array with themed items chosen for the game.
+     * @param themeDecription - the chosen theme
      */
     ComputerRow.prototype.setThemeArray = function (themeDecription) {
         var theme = new theme_1.default(themeDecription);
@@ -58,16 +58,23 @@ var ComputerRow = /** @class */ (function () {
         return this.computerRow;
     };
     /**
-     * Creates a random row based on the itemArray and returns it to the computer.
-     *
-     * @returns {string [] } - A row with items.
+     * Creates a random row with names from the chosen theme that has been set in themeArray.
+     * The computer will use the secret row in the game.
+     * The number of items will decide how many names that should be included.
      */
-    ComputerRow.prototype.generateRow = function () {
-        var rowLength = this.numberOfItems;
-        for (var i = 0; i < rowLength; i++) {
-            var nextItemIndex = Math.floor(Math.random() * this.themeArray.length);
-            var themeItem = this.themeArray[nextItemIndex];
-            this.computerRow.push(themeItem);
+    ComputerRow.prototype.generateComputerRow = function () {
+        try {
+            var rowLength = this.numberOfItems;
+            for (var i = 0; i < rowLength; i++) {
+                var nextItemIndex = Math.floor(Math.random() * this.themeArray.length);
+                var themeItem = this.themeArray[nextItemIndex];
+                this.computerRow.push(themeItem);
+            }
+        }
+        catch (error) {
+            if (error instanceof Error) {
+                console.log(error);
+            }
         }
     };
     return ComputerRow;

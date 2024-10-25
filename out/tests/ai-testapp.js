@@ -37,10 +37,10 @@ while (gameContinues) {
         const guess = itemArray[guessIndex];
         answer.push(guess);
     }
-    console.log(`Answer from user: ${JSON.stringify(answer)}`);
+    console.log(`Answer from player: ${JSON.stringify(answer)}`);
     let resultArray = [];
     //Checks with the computer if the answer is correct.
-    resultArray = computer.checkAnswer(answer);
+    resultArray = computer.getFeedBackFromComputer(answer);
     // Checks how many guesses the AI has used. 
     const numberOfGuesses = computer.getNumberOfGuesses();
     let correctGuesses = 0;
@@ -49,22 +49,25 @@ while (gameContinues) {
         if (color === 'green') {
             correctGuesses++;
         }
-        // Checks if the user has won and prints the resulttext and number of guesses needed if the user won. 
-        // Prints the item + color. Green = correct place. Yellow = wrong place. Red = does not occur in the row.
-        if (correctGuesses === numberOfItems) {
-            console.log(`Congratulations! You made it! Total number of guesses: ${numberOfGuesses}`);
-            gameContinues = false;
+    }
+    // Checks if the user has won and prints the resulttext and number of guesses needed if the user won. 
+    // Prints the item + color. Green = correct place. Yellow = wrong place. Red = does not occur in the row.
+    if (correctGuesses === numberOfItems) {
+        for (let i = 0; i < numberOfItems; i++) {
+            console.log(`Result${i + 1}: ${resultArray[i].getName()}, color: ${resultArray[i].getColor()}`);
         }
-        else {
-            for (let i = 0; i < resultArray.length; i++) {
-                console.log(`Result: ${resultArray[i].getName()}, color: ${resultArray[i].getColor()}`);
-            }
+        console.log(`Congratulations! You made it! Total number of guesses: ${numberOfGuesses}`);
+        gameContinues = false;
+    }
+    else {
+        for (let i = 0; i < numberOfItems; i++) {
+            console.log(`Result${i + 1}: ${resultArray[i].getName()}, color: ${resultArray[i].getColor()}`);
         }
-        // Ends the game if the AI has used 40 guesses.
-        if (numberOfGuesses === 40 || numberOfGuesses > 40) {
-            console.log(`You have unfortunately reached the maximum number of guesses. (${numberOfGuesses} guesses)`);
-            gameContinues = false;
-        }
+    }
+    // Ends the game if the AI has used 40 guesses.
+    if (numberOfGuesses === 40 || numberOfGuesses > 40) {
+        console.log(`You have unfortunately reached the maximum number of guesses. (${numberOfGuesses} guesses)`);
+        gameContinues = false;
     }
 }
 //# sourceMappingURL=ai-testapp.js.map

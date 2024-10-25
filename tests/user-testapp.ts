@@ -66,7 +66,7 @@ while (gameContinues === true) {
     }
 
     //Checks with the computer if the answer is correct.
-    let resultArray = computer.checkAnswer((answer))
+    let resultArray = computer.getFeedBackFromComputer((answer))
 
     // Checks how many guesses the AI has used. 
     const numberOfGuesses = computer.getNumberOfGuesses()

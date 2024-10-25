@@ -14,6 +14,7 @@ class ComputerRow {
         this.themeArray = [];
         this.setNumberOfItems(numberOfItems);
         this.setThemeArray(themeDecription);
+        this.generateComputerRow();
     }
     /**
      * Gets the number of items that is included in the computer row.
@@ -21,7 +22,7 @@ class ComputerRow {
      * @returns { number } - number of items included in the computer row.
      */
     getNumberOfItems() {
-        if (this.numberOfItems === null) {
+        if (!this.numberOfItems) {
             throw new Error('Number of items has not been set for the game');
         }
         return this.numberOfItems;
@@ -42,25 +43,42 @@ class ComputerRow {
     /**
      * Sets the itemArray if there are 8 items in the provided array.
      *
-     * @param themeArray object [] - the array with themed items chosen for the game.
+     * @param themeDecription - the chosen theme
      */
     setThemeArray(themeDecription) {
         const theme = new theme_1.default(themeDecription);
         this.themeArray = theme.getThemeArray();
     }
     /**
-     * Creates a random row based on the itemArray and returns it to the computer.
-     *
-     * @returns {string [] } - A row with items.
-     */
-    generateRow() {
-        const rowLength = this.numberOfItems;
-        for (let i = 0; i < rowLength; i++) {
-            const nextItemIndex = Math.floor(Math.random() * this.themeArray.length);
-            const themeItem = this.themeArray[nextItemIndex];
-            this.computerRow.push(themeItem);
+    * Gets the computer row.
+    *
+    * @returns { string [] } - the computer row.
+    */
+    getComputerRow() {
+        if (this.computerRow === undefined) {
+            throw new Error('No computer row has been set for the game');
         }
         return this.computerRow;
+    }
+    /**
+     * Creates a random row with names from the chosen theme that has been set in themeArray.
+     * The computer will use the secret row in the game.
+     * The number of items will decide how many names that should be included.
+     */
+    generateComputerRow() {
+        try {
+            const rowLength = this.numberOfItems;
+            for (let i = 0; i < rowLength; i++) {
+                const nextItemIndex = Math.floor(Math.random() * this.themeArray.length);
+                const themeItem = this.themeArray[nextItemIndex];
+                this.computerRow.push(themeItem);
+            }
+        }
+        catch (error) {
+            if (error instanceof Error) {
+                console.log(error);
+            }
+        }
     }
 }
 exports.default = ComputerRow;

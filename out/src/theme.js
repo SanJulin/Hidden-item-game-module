@@ -65,10 +65,10 @@ class Theme {
         }
     }
     /**
- * Gets the current array with items.
- *
- * @returns { string [] } - an array with items.
- */
+    * Gets the current array with items.
+    *
+    * @returns { string [] } - an array with items.
+    */
     getThemeArray() {
         try {
             return this.themeArray;
@@ -82,7 +82,7 @@ class Theme {
      * Sets the theme and itemArray for other themes than the available themes included in the module. The user of the module must provide a theme name and an array that includes 8 items in order to create a themes of their choice.
      *
      * @param theme { string } - the name of the theme
-     * @param themeArray { object [] } - the array with 8 items that should be included in the itemArray.
+     * @param themeArray { string [] } - the array with 8 items that should be included in the itemArray.
      */
     setOtherTheme(theme, themeArray) {
         if (themeArray.length !== 8) {
@@ -124,13 +124,13 @@ class Theme {
         this.createItemArray();
     }
     /**
-     * Creates an array with items based on the provided theme array. Uncomment the url row and insert url when creating an item if the image should be included in the item. (const item = new Item(i + 1, this.themeArray[i], url))
+     * Creates an array with items based on the provided theme array.
      */
     createItemArray() {
         if (this.themeArray) {
             for (let i = 0; i < this.themeArray.length; i++) {
-                //const url = `/img/${this.theme}/${(this.themeArray[i])}.jpg`
-                const item = new item_1.default(i + 1, this.themeArray[i]);
+                const url = `../img/${this.theme}/${(this.themeArray[i])}.jpg`;
+                const item = new item_1.default(i + 1, this.themeArray[i] /*, url*/);
                 this.itemArray.push(item);
             }
         }

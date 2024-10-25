@@ -19,8 +19,8 @@ console.log('Computer object:');
 console.log(computer);
 // Send the players guess to the computer. The computer compares the row of items to the computerRow and sends back a result/feedback
 var answerArray = [new item_1.default(1, 'Actor'), new item_1.default(2, 'Chef'), new item_1.default(3, 'Developer'), new item_1.default(4, 'Doctor')];
-var result = computer.checkAnswer(answerArray);
-console.log("\ncomputer.checkAnswer(answerArray)  -    \nresult: ".concat(JSON.stringify(result)));
+var result = computer.getFeedBackFromComputer(answerArray);
+console.log("\ncomputer.getFeedBackFromComputer(answerArray)  -    \nresult: ".concat(JSON.stringify(result)));
 // Gets the number of guesses used so far in the game
 var guesses = computer.getNumberOfGuesses();
 console.log("\ncomputer.getNumberOfGuesses()  -    \nresult: ".concat(guesses, "\n"));
@@ -51,8 +51,6 @@ console.log("\ntheme.getAvailableThemes() -    result: ".concat(theme.getAvailab
 // Sets the theme to animals
 theme.setTheme('animals');
 console.log('\ntheme.setTheme(animals)');
-// Gets the chosen theme
-console.log("\ntheme.getTheme() -      result: ".concat(theme.getTheme()));
 // Gets an array with names within the choosen theme
 console.log("\ntheme.getThemeArray() -      result: ".concat(theme.getThemeArray()));
 // Gets and array with 8 items belonging to the chosen array

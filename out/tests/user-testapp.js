@@ -61,60 +61,47 @@ const numberOfItems = readlineSync.question('How many items would you like to pl
 // Creates an array with options with the theme set for the game.
 const itemOptions = gameTheme.getItemArray();
 //Creates a new computer opponent. 
-const computer = new computer_1.default(numberOfItems, itemOptions);
+const computer = new computer_1.default(numberOfItems, theme);
 //Prints the computer object to make it easier to check if the test result is correct. 
 console.log(computer);
 let gameContinues = true;
 while (gameContinues === true) {
     // Writes out the options that the user can choose between
     console.log('\nYour options:');
-    console.log(itemOptions);
+    for (let i = 0; i < itemOptions.length; i++) {
+        console.log(itemOptions[i].getId(), itemOptions[i].getName());
+    }
     // Takes the input guessed by the user
-    const answerInNumbers = readlineSync.question(`Pls guess the content in the computer row. choose ${numberOfItems} (id) numbers to represent your row. `);
-    let answer = [];
+    const answerInNumbers = readlineSync.question(`Pls guess the content in the computer row. choose ${numberOfItems} numbers to represent your row. `);
     // Creates an array with the items that the user has choosen.
+    let answer = [];
     for (let i = 0; i < answerInNumbers.length; i++) {
-        if (answerInNumbers[i] === '1') {
-            answer.push(itemOptions[0]);
-        }
-        else if (answerInNumbers[i] === '2') {
-            answer.push(itemOptions[1]);
-        }
-        else if (answerInNumbers[i] === '3') {
-            answer.push(itemOptions[2]);
-        }
-        else if (answerInNumbers[i] === '4') {
-            answer.push(itemOptions[3]);
-        }
-        else if (answerInNumbers[i] === '5') {
-            answer.push(itemOptions[4]);
-        }
-        else if (answerInNumbers[i] === '6') {
-            answer.push(itemOptions[5]);
-        }
-        else if (answerInNumbers[i] === '7') {
-            answer.push(itemOptions[6]);
-        }
-        else if (answerInNumbers[i] === '8') {
-            answer.push(itemOptions[7]);
-        }
+        const ans = answerInNumbers[i];
+        console.log(ans);
+        const answeredItem = itemOptions[(ans - 1)];
+        console.log(answeredItem);
+        answer.push(answeredItem);
     }
     //Checks with the computer if the answer is correct.
-    let result = computer.checkAnswer((answer));
-    console.log(computer.checkAnswer(answer));
-    let parsedResult = JSON.parse(result);
+    let resultArray = computer.getFeedBackFromComputer((answer));
+    // Checks how many guesses the AI has used. 
+    const numberOfGuesses = computer.getNumberOfGuesses();
+    let correctGuesses = 0;
+    for (let i = 0; i < resultArray.length; i++) {
+        const color = resultArray[i].getColor();
+        if (color === 'green') {
+            correctGuesses++;
+        }
+    }
     // Checks if the user has won and prints the resulttext and number of guesses needed if the user won. 
     // Prints the item + color. Green = correct place. Yellow = wrong place. Red = does not occur in the row.
     console.log('\nResult from Computer:');
-    if (parsedResult === 'Congratulations! You made it!') {
-        console.log(parsedResult);
-        console.log(`Total number of guesses: ${computer.getNumberOfGuesses()}`);
-        gameContinues = false;
+    for (let i = 0; i < numberOfItems; i++) {
+        console.log(`Result${i + 1}: ${resultArray[i].getName()}, color: ${resultArray[i].getColor()}`);
     }
-    else {
-        for (let i = 0; i < parsedResult.length; i++) {
-            console.log(parsedResult[i]);
-        }
+    if (correctGuesses === parseInt(numberOfItems)) {
+        console.log(`Congratulations! You made it! Total number of guesses: ${numberOfGuesses}`);
+        gameContinues = false;
     }
 }
 //# sourceMappingURL=user-testapp.js.map
