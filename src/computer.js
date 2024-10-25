@@ -18,18 +18,7 @@ var Computer = /** @class */ (function () {
      */
     Computer.prototype.createComputerRow = function (numberOfItems, themeDescription) {
         var computerRow = new computer_row_1.default(numberOfItems, themeDescription);
-        this.computerRow = computerRow.generateRow();
-    };
-    /**
-     * Returns an array with the items that represent the current computer row.
-     *
-     * @returns { string [] } - an array with items
-     */
-    Computer.prototype.getComputerRow = function () {
-        if (this.computerRow === undefined) {
-            throw new Error('The computer row has not been created yet');
-        }
-        return this.computerRow;
+        this.computerRow = computerRow.getComputerRow();
     };
     /**
      * Gets the number of guesses used in a playround.

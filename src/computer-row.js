@@ -11,6 +11,7 @@ var ComputerRow = /** @class */ (function () {
         this.themeArray = [];
         this.setNumberOfItems(numberOfItems);
         this.setThemeArray(themeDecription);
+        this.generateRow();
     }
     /**
      * Gets the number of items that is included in the computer row.
@@ -46,6 +47,17 @@ var ComputerRow = /** @class */ (function () {
         this.themeArray = theme.getThemeArray();
     };
     /**
+    * Gets the computer row.
+    *
+    * @returns { string [] } - the computer row.
+    */
+    ComputerRow.prototype.getComputerRow = function () {
+        if (this.computerRow === undefined) {
+            throw new Error('No computer row has been set for the game');
+        }
+        return this.computerRow;
+    };
+    /**
      * Creates a random row based on the itemArray and returns it to the computer.
      *
      * @returns {string [] } - A row with items.
@@ -57,7 +69,6 @@ var ComputerRow = /** @class */ (function () {
             var themeItem = this.themeArray[nextItemIndex];
             this.computerRow.push(themeItem);
         }
-        return this.computerRow;
     };
     return ComputerRow;
 }());

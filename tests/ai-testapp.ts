@@ -47,7 +47,7 @@ while (gameContinues) {
         answer.push(guess)
     }
 
-    console.log(`Answer from user: ${JSON.stringify(answer)}`)
+    console.log(`Answer from player: ${JSON.stringify(answer)}`)
 
     let resultArray: Item[] = []
     //Checks with the computer if the answer is correct.
@@ -62,15 +62,19 @@ while (gameContinues) {
         if (color === 'green') {
             correctGuesses++
         }
+    }
 
         // Checks if the user has won and prints the resulttext and number of guesses needed if the user won. 
         // Prints the item + color. Green = correct place. Yellow = wrong place. Red = does not occur in the row.
         if (correctGuesses === numberOfItems) {
+            for (let i = 0; i < numberOfItems; i++) {
+                console.log(`Result${i + 1}: ${resultArray[i].getName()}, color: ${resultArray[i].getColor()}`)
+            }
             console.log(`Congratulations! You made it! Total number of guesses: ${numberOfGuesses}`)
             gameContinues = false
         } else {
-            for (let i = 0; i < resultArray.length; i++) {
-                console.log(`Result: ${resultArray[i].getName()}, color: ${resultArray[i].getColor()}`)
+            for (let i = 0; i < numberOfItems; i++) {
+                console.log(`Result${i + 1}: ${resultArray[i].getName()}, color: ${resultArray[i].getColor()}`)
             }
         }
 
@@ -79,5 +83,4 @@ while (gameContinues) {
             console.log(`You have unfortunately reached the maximum number of guesses. (${numberOfGuesses} guesses)`)
             gameContinues = false
         }
-    }
 }

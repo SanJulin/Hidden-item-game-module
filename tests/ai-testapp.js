@@ -34,7 +34,7 @@ while (gameContinues) {
         var guess = itemArray[guessIndex];
         answer.push(guess);
     }
-    console.log("Answer from user: ".concat(JSON.stringify(answer)));
+    console.log("Answer from player: ".concat(JSON.stringify(answer)));
     var resultArray = [];
     //Checks with the computer if the answer is correct.
     resultArray = computer.checkAnswer(answer);
@@ -46,21 +46,24 @@ while (gameContinues) {
         if (color === 'green') {
             correctGuesses++;
         }
-        // Checks if the user has won and prints the resulttext and number of guesses needed if the user won. 
-        // Prints the item + color. Green = correct place. Yellow = wrong place. Red = does not occur in the row.
-        if (correctGuesses === numberOfItems) {
-            console.log("Congratulations! You made it! Total number of guesses: ".concat(numberOfGuesses));
-            gameContinues = false;
+    }
+    // Checks if the user has won and prints the resulttext and number of guesses needed if the user won. 
+    // Prints the item + color. Green = correct place. Yellow = wrong place. Red = does not occur in the row.
+    if (correctGuesses === numberOfItems) {
+        for (var i = 0; i < numberOfItems; i++) {
+            console.log("Result".concat(i + 1, ": ").concat(resultArray[i].getName(), ", color: ").concat(resultArray[i].getColor()));
         }
-        else {
-            for (var i_1 = 0; i_1 < resultArray.length; i_1++) {
-                console.log("Result: ".concat(resultArray[i_1].getName(), ", color: ").concat(resultArray[i_1].getColor()));
-            }
+        console.log("Congratulations! You made it! Total number of guesses: ".concat(numberOfGuesses));
+        gameContinues = false;
+    }
+    else {
+        for (var i = 0; i < numberOfItems; i++) {
+            console.log("Result".concat(i + 1, ": ").concat(resultArray[i].getName(), ", color: ").concat(resultArray[i].getColor()));
         }
-        // Ends the game if the AI has used 40 guesses.
-        if (numberOfGuesses === 40 || numberOfGuesses > 40) {
-            console.log("You have unfortunately reached the maximum number of guesses. (".concat(numberOfGuesses, " guesses)"));
-            gameContinues = false;
-        }
+    }
+    // Ends the game if the AI has used 40 guesses.
+    if (numberOfGuesses === 40 || numberOfGuesses > 40) {
+        console.log("You have unfortunately reached the maximum number of guesses. (".concat(numberOfGuesses, " guesses)"));
+        gameContinues = false;
     }
 }

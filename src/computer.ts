@@ -1,5 +1,5 @@
 import ComputerRow from './computer-row';
-import Item from './item'
+import Item from './item';
 
 /**
  * Class that represents the computer in the game.
@@ -20,19 +20,7 @@ class Computer {
      */
     private createComputerRow(numberOfItems: number, themeDescription: string): void {
             const computerRow = new ComputerRow(numberOfItems, themeDescription)
-            this.computerRow = computerRow.generateRow()
-    }
-
-    /**
-     * Returns an array with the items that represent the current computer row.
-     * 
-     * @returns { string [] } - an array with items
-     */
-    public getComputerRow(): string[] {
-        if (this.computerRow === undefined) {
-            throw new Error('The computer row has not been created yet')
-        }
-        return this.computerRow
+            this.computerRow = computerRow.getComputerRow()
     }
 
     /**

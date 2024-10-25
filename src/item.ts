@@ -5,14 +5,14 @@ class Item {
     private id: number = 0
     private name: string = ''
     private color: string = ''
-    private image: HTMLImageElement | undefined
+    //private image: HTMLImageElement | undefined
 
-    constructor(id: number, name: string, url?: string) {
+    constructor(id: number, name: string/*, url?: string*/) {
         this.id = id
         this.name = name
-        if (url) {
-            this.setImage(url)
-        }
+        //if (url) {
+        //    this.setImage(url)
+        //}
     }
 
     /**
@@ -58,23 +58,23 @@ class Item {
     /**
      * Gets the item image if it exists.
      */
-    public getImage(): HTMLImageElement | undefined {
-        if (this.image) {
-            return this.image
-        }
-    }
+    //public getImage(): HTMLImageElement | undefined {
+    //    if (this.image) {
+    //        return this.image
+    //    }
+    //}
 
     /**
      * Sets the item image if an url was provided. Looks like this if it comes from the Theme class: `../img/${this.theme}/${(this.themeArray[i])}.jpg`.
      * 
      * @param url - the url to the image in the img folder
      */
-    public setImage(url: string) {
-        const image = document.createElement('img')
-        image.setAttribute('src', url)
-        image.setAttribute('alt', this.name)
-        this.image = image
-    }
+    //public setImage(url: string) {
+    //    const image = document.createElement('img')
+    //    image.setAttribute('src', url)
+    //    image.setAttribute('alt', this.name)
+    //    this.image = image
+    //}
 }
 
 export default Item

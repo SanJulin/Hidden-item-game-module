@@ -23,7 +23,7 @@ class Theme {
     * @returns { string } - the theme of the items used in the game.
     */
     public getTheme(): string {
-        if (this.theme) {
+        if (!this.theme) {
             throw new Error('No theme has been set for the game')
         }
         return this.theme
@@ -51,49 +51,15 @@ class Theme {
     }
 
     /**
-     * Gets the current array with items.
-     * 
-     * @returns { Item [] } - an array with items.
-     */
-    public getItemArray(): Item[] {
-        try {
-            return this.itemArray
-        } catch (error) {
-            console.log(error)
-            return []
-        }
-    }
-
-    /**
- * Gets the current array with items.
- * 
- * @returns { string [] } - an array with items.
- */
+    * Gets the current array with items.
+    * 
+    * @returns { string [] } - an array with items.
+    */
     public getThemeArray(): string[] {
-        try {
+        if (this.themeArray) {
             return this.themeArray
-        } catch (error) {
-            console.log(error)
-            return []
-        }
-    }
-
-    /**
-     * Sets the theme and itemArray for other themes than the available themes included in the module. The user of the module must provide a theme name and an array that includes 8 items in order to create a themes of their choice.
-     * 
-     * @param theme { string } - the name of the theme
-     * @param themeArray { object [] } - the array with 8 items that should be included in the itemArray.
-     */
-    public setOtherTheme(theme: string, themeArray: string[]): void {
-        if (themeArray.length !== 8) {
-            throw Error('The themeArray must contain 8 items.')
-        }
-        if (theme === '') {
-            throw Error('Pls provide a theme "name" for the game')
         } else {
-            this.theme = theme
-            this.themeArray = themeArray
-            this.createItemArray()
+            throw new Error('No theme has been set for the game')
         }
     }
 
@@ -124,13 +90,26 @@ class Theme {
     }
 
     /**
+    * Gets the current array with items.
+    * 
+    * @returns { Item [] } - an array with items.
+    */
+    public getItemArray(): Item[] {
+        if (this.itemArray) {
+            return this.itemArray
+        } else {
+            throw new Error('No item array has been set for the game')
+        }
+    }
+
+    /**
      * Creates an array with items based on the provided theme array. Uncomment the url row and insert url when creating an item if the image should be included in the item. (const item = new Item(i + 1, this.themeArray[i], url))
      */
     private createItemArray(): void {
         if (this.themeArray) {
             for (let i = 0; i < this.themeArray.length; i++) {
                 //const url = `/img/${this.theme}/${(this.themeArray[i])}.jpg`
-                const item = new Item(i + 1, this.themeArray[i])
+                const item = new Item(i + 1, this.themeArray[i]/*, url*/)
                 this.itemArray.push(item)
             }
         } else {
